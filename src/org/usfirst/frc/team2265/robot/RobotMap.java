@@ -15,7 +15,7 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	
+	//REAL PORTS TBD 
 		//Joystick Ports
 		public static int leftJoyPort = 0;
 		public static int rightJoyPort = 1;
@@ -23,17 +23,24 @@ public class RobotMap {
 			
 		//Talon Ports
 		public static int cannonFLPort = 0;
-		public static int cannonFRPort = 14;
-		public static int camTalonPort = 1;
-		public static int rearLeftPort = 1;
-		public static int rearRightPort = 1;
-		public static int frontLeftPort = 1;
-		public static int frontRightPort = 1;
+		public static int cannonFRPort = 99;
+		public static int rollerPort = 99; 
+		public static int camTalonPort = 99;
+		public static int rearLeftPort = 99;
+		public static int rearRightPort = 99;
+		public static int frontLeftPort = 99;
+		public static int frontRightPort = 99;
 		
 		//Sensor Ports
 		public static int gyroPort = 0; //analog
 		public static int sol1Port = 0;
 		public static int sol2Port = 1;
+		
+		//Solenoid Ports
+		public static int rollerSolPort1 = 0;
+		public static int rollerSolPort2 = 1; 
+		public static int cannonSolPort1 = 2;
+		public static int cannonSolPort2 = 3;
 		
 		
 		
