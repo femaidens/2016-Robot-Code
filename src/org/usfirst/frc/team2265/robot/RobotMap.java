@@ -6,6 +6,7 @@ package org.usfirst.frc.team2265.robot;
  * floating around.
  */
 public class RobotMap {
+
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
@@ -27,10 +28,10 @@ public class RobotMap {
 		public static int cannonFRPort = 99;
 		public static int rollerPort = 99; 
 		public static int camTalonPort = 99;
-		public static int rearLeftPort = 99;
-		public static int rearRightPort = 99;
-		public static int frontLeftPort = 99;
-		public static int frontRightPort = 99;
+		public static int rearLeftPort = 1;
+		public static int rearRightPort = 13;
+		public static int frontLeftPort = 2;
+		public static int frontRightPort = 12;
 		
 		//Sensor Ports
 		public static int gyroPort = 0; //analog
@@ -40,11 +41,14 @@ public class RobotMap {
 		public static int rollerSolPort2 = 1; 
 		public static int cannonSolPort1 = 2;
 		public static int cannonSolPort2 = 3;
+		public static int transPort1 = 99;
+		public static int transPort2 = 99;
 		
 		//Encoder Ports
 		public static int encLeftPort1 = 0;
 		public static int encLeftPort2 = 0;
 		public static int encRightPort1 = 0;
 		public static int encRightPort2 = 0;
-		
+
+ 
 }
