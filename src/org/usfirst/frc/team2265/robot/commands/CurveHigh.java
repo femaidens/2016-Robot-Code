@@ -26,7 +26,7 @@ public class CurveHigh extends Command {
         // eg. requires(chassis);
     	requires(Robot.cannon);
     }
-   
+    	//TO-DO: Change this from PWM value to actual velocity. 
     // Called just before this Command runs the first time
     protected void initialize() {
     }

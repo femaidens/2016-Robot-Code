@@ -41,6 +41,10 @@ public class RobotMap {
 		public static int cannonSolPort1 = 2;
 		public static int cannonSolPort2 = 3;
 		
-		
+		//Encoder Ports
+		public static int encLeftPort1 = 0;
+		public static int encLeftPort2 = 0;
+		public static int encRightPort1 = 0;
+		public static int encRightPort2 = 0;
 		
 }

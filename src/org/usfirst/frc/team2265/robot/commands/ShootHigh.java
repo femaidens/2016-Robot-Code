@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShootHigh extends Command {
 	double velocity = 0.5;
-	
+	//TO-DO: Change this value from PWM to actual velocity. 
     public ShootHigh() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

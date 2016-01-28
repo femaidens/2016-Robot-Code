@@ -21,6 +21,7 @@ public class CurveLow extends Command {
     		leftVelocity = 0.3;
     		rightVelocity = 0.5;
     	}
+    	//TO-DO: Change this from PWM value to actual velocity. 
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires (Robot.cannon);
