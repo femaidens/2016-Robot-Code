@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2265.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser chooser;
+    Compressor compressy; 
 
     /**
      * This function is run when the robot is first started up and should be
@@ -37,7 +39,10 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-        DriveTrain= new Drivetrain(); 
+        compressy= new Compressor(); 
+        DriveTrain= new Drivetrain();
+        compressy.start(); 
+        oi.bindButtons(); 
     }
 	
 	/**
