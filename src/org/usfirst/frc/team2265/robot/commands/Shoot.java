@@ -7,25 +7,27 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShootLow extends Command {
-
-	double velocity = 0.5;
+public class Shoot extends Command {
+	double v = 0.5;
 	
-    public ShootLow() {
+    public Shoot(double velocity) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires (Robot.cannon);
+    	v = velocity;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	//turn off compressor
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cannon.liftRoller();
-    	Robot.cannon.spinWheels(velocity);
-    	Robot.cannon.lowerRoller();
+    	if (Robot.cannon.isHigh)
+    		Robot.cannon.spinWheels(v*1.25);
+    	if (Robot.cannon.isLow)
+    		Robot.cannon.spinWheels(v*0.75);
     }
 
     // Make this return true when this Command no longer needs to run execute()

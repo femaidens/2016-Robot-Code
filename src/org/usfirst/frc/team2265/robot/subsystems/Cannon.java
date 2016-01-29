@@ -12,20 +12,26 @@ import org.usfirst.frc.team2265.robot.subsystems.Piston;
 public class Cannon extends Subsystem {
 
     public Talon cannonFL, cannonFR, roller;
-    public CANTalon camTalon;
-    public Piston rollerPiston, cannonPiston;
+    public CANTalon camTalon, rollerPos;
+    public Piston cannonPiston;
     public boolean isShooting = false;
     //test to find number of ticks needed to fully turn the cam
     private int camTicks = 1800;
+    private int shootTicks = 1800;
+    private int acquireTicks = 1800;
+    private int gateTicks = 1800;
+    public boolean isHigh, isLow; 
+    
 
     public Cannon() {
         cannonFL = new Talon(RobotMap.cannonFLPort);
         cannonFR = new Talon(RobotMap.cannonFRPort);
         roller = new Talon(RobotMap.rollerPort);
-        rollerPiston = new Piston(RobotMap.rollerSolPort1, RobotMap.rollerSolPort2);
+        rollerPos = new CANTalon(RobotMap.rollerPosPort);
         cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2);
         camTalon = new CANTalon(RobotMap.camTalonPort);
         camTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        rollerPos.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     }
 
     // Put methods for controlling this subsystem
@@ -67,19 +73,32 @@ public class Cannon extends Subsystem {
         	isShooting = true;
     }
     
-    public void liftRoller() {
-    	rollerPiston.extend();
-    }
-    
-    public void lowerRoller() {
-    	rollerPiston.retract();
-    }
-    
     public void liftCannon() {
     	cannonPiston.extend();
+    	isHigh = true; 
+    	isLow = false; 
     }
     
     public void lowerCannon() {
     	cannonPiston.retract();
+    	isLow = true;
+    	isHigh = false; 
+    }
+    
+    public void rollerShootPos() {
+    	while (rollerPos.getEncPosition() < shootTicks) 
+            rollerPos.set(0.25);
+
+    }
+    
+    public void rollerAcquirePos() {
+    	while (rollerPos.getEncPosition() < acquireTicks) 
+            rollerPos.set(0.25);
+
+    }
+    
+    public void rollerGatePos() {
+    	while (rollerPos.getEncPosition() < gateTicks) 
+            rollerPos.set(0.25);
     }
 }
