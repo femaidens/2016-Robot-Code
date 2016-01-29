@@ -20,7 +20,7 @@ public class ToggleCannon extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.cannon.isHigh)
+    	if (Robot.cannon.isHigh || Robot.cannon.atStart)
     			Robot.cannon.lowerCannon();
     	if (Robot.cannon.isLow)
     			Robot.cannon.liftCannon(); 

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -13,14 +14,16 @@ public class Piston extends Subsystem {
     // here. Call these from Commands.
 	
 	DoubleSolenoid actuator;
+	Solenoid actuator2;
 	
-	public Piston (int port1, int port2 ) {
+	public Piston (int port1, int port2, int port3) {
 		actuator = new DoubleSolenoid(port1, port2);
+		actuator2 = new Solenoid(port3);
 	}
 	
  
 	//method to extend the piston
-	public void extend() {
+	public void extendFull() {
 		actuator.set(DoubleSolenoid.Value.kForward);
 	}
 	
@@ -29,6 +32,9 @@ public class Piston extends Subsystem {
 		actuator.set(DoubleSolenoid.Value.kReverse);
 	}
 	
+	public void extendHalf() {
+		actuator2.set(true);
+	}
 	//method to return the value of the piston
 	public Value get() {
 		return actuator.get();

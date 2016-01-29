@@ -20,7 +20,7 @@ public class Cannon extends Subsystem {
     private int shootTicks = 1800;
     private int acquireTicks = 1800;
     private int gateTicks = 1800;
-    public boolean isHigh, isLow; 
+    public boolean isHigh, isLow, atStart; 
     
 
     public Cannon() {
@@ -28,7 +28,7 @@ public class Cannon extends Subsystem {
         cannonFR = new Talon(RobotMap.cannonFRPort);
         roller = new Talon(RobotMap.rollerPort);
         rollerPos = new CANTalon(RobotMap.rollerPosPort);
-        cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2);
+        cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3);
         camTalon = new CANTalon(RobotMap.camTalonPort);
         camTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         rollerPos.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -74,17 +74,26 @@ public class Cannon extends Subsystem {
     }
     
     public void liftCannon() {
-    	cannonPiston.extend();
+    	cannonPiston.extendHalf();
     	isHigh = true; 
     	isLow = false; 
+    	atStart = false;
     }
     
     public void lowerCannon() {
     	cannonPiston.retract();
     	isLow = true;
     	isHigh = false; 
+    	atStart = true;
     }
     
+    public void liftCannonFully(){
+    	cannonPiston.extendFull();
+    	atStart = false;
+    	isLow = false;
+    	isHigh = false;
+    	
+    }
     public void rollerShootPos() {
     	while (rollerPos.getEncPosition() < shootTicks) 
             rollerPos.set(0.25);

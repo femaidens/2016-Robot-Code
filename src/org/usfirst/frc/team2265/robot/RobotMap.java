@@ -39,7 +39,8 @@ public class RobotMap {
 		//Solenoid Ports
 		public static int cannonSolPort1 = 2;
 		public static int cannonSolPort2 = 3;
-		
-		
+		public static int cannonSolPort3 = 4;
+		public static int cannonSolPort4 = 5;
+		 	
 		
 }
