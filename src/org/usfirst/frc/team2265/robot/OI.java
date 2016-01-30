@@ -28,25 +28,42 @@ public class OI {
 	Joystick leftJoy = new Joystick(1);
 	Joystick rightJoy = new Joystick(2);
 	Joystick atkJoy = new Joystick(3);
-	
+
+	//shooting
 	Button shoot = new JoystickButton(atkJoy, 1); //button a
 	Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
 	Button rollerToShoot = new JoystickButton(rightJoy, 1);//right trigger
 	Button rollerToAcq = new JoystickButton(rightJoy, 2);//thumb button
-	Button rollerToGate = new JoystickButton(leftJoy, 1); //left trigger	
+	Button rollerToGate = new JoystickButton(leftJoy, 1); //left trigger
+	Button aim = new JoystickButton(atkJoy, 3); //button x
+	//climbing
+	Button extendArm = new JoystickButton(rightJoy, 5); //right button 5
+	Button lift = new JoystickButton(rightJoy, 6); //right button 6
+	//driving
+	Button toPower = new JoystickButton(leftJoy, 3); //left button 3
+	Button toSpeed = new JoystickButton(leftJoy, 4); //left button 4
 	
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
 	public void bindButtons(){
+			//shooting
 			/*shoot.whenPressed(new Shoot(0.4));
 			shoot.whenPressed(new StopCannon());
 			toggleCannonPos.whenPressed(new ToggleCannon());
 			acquire.whileHeld(new Acquire());
 			rollerToShoot.whenPressed(new RollerToShoot());
 			rollerToAcq.whenPressed(new RollerToAcq());
-			rollerToGate.whenPressed(new RollerToGate());*/
+			rollerToGate.whenPressed(new RollerToGate());
+			aim.whenPressed(new Aim());
+			
+			//driving
+			toPower.whenPressed(new ShiftToPower());
+			toSpeed.whenPressed(new ShiftToSpeed());
+			*/
+		
+			//need to add lift commands/buttons
 	}
     
     //// TRIGGERING COMMANDS WITH BUTTONS
