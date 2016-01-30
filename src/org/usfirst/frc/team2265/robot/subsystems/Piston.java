@@ -13,12 +13,11 @@ public class Piston extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	DoubleSolenoid actuator;
-	Solenoid actuator2;
+	DoubleSolenoid actuator, actuator2;
 	
-	public Piston (int port1, int port2, int port3) {
+	public Piston (int port1, int port2, int port3, int port4) {
 		actuator = new DoubleSolenoid(port1, port2);
-		actuator2 = new Solenoid(port3);
+		actuator2 = new DoubleSolenoid(port3, port4);
 	}
 	
  
@@ -33,7 +32,7 @@ public class Piston extends Subsystem {
 	}
 	
 	public void extendHalf() {
-		actuator2.set(true);
+		actuator2.set(DoubleSolenoid.Value.kForward);
 	}
 	//method to return the value of the piston
 	public Value get() {
