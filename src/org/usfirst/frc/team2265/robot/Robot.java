@@ -23,7 +23,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static Drivetrain DriveTrain; 
+	public static Drivetrain driveTrain; 
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         compressy= new Compressor(); 
-        DriveTrain= new Drivetrain();
+        driveTrain= new Drivetrain();
         compressy.start(); 
         oi.bindButtons(); 
     }
@@ -105,7 +105,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        DriveTrain.drive(); 
+        driveTrain.drive(); 
     }
     
     /**

@@ -50,12 +50,12 @@ public class Drivetrain extends Subsystem {
     	return gearShifter.get(); 
     }
     // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }    
+    // here. Call these from Commands.    
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}
     
 }
 

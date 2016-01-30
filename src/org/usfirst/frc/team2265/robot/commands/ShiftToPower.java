@@ -1,19 +1,19 @@
-package org.usfirst.frc.team2265.robot.commands;
 
-import org.usfirst.frc.team2265.robot.Robot;
+package org.usfirst.frc.team2265.robot.commands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc.team2265.robot.Robot;
+
 /**
  *
  */
-public class ToggleMode extends Command {
-	boolean shifted;
-    public ToggleMode() {
+public class ShiftToPower extends Command {
+
+    public ShiftToPower() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.driveTrain); 
+        requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -22,24 +22,14 @@ public class ToggleMode extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	if (Robot.driveTrain.get().equals(Value.kReverse)|| Robot.driveTrain.get().equals(Value.kOff)){
-    		Robot.driveTrain.shiftToSpeed(); 
-    		shifted = true;
-    		return;
-    		
-    	}
-    	
-    	if(Robot.driveTrain.get().equals(Value.kForward)|| Robot.driveTrain.get().equals(Value.kOff)){
-    		Robot.driveTrain.shiftToPower(); 
-    		shifted = true; 
-    		return;
-    	}
-    }
+	    if (Robot.driveTrain.get().equals(Value.kReverse) || Robot.driveTrain.get().equals(Value.kOff)){
+	    		Robot.driveTrain.shiftToPower();
+	    		}
+	    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return shifted;
+        return true;
     }
 
     // Called once after isFinished returns true
