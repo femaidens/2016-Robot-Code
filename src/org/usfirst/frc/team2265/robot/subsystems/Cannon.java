@@ -18,23 +18,29 @@ public class Cannon extends Subsystem {
     public PIDController PIDCannonFL, PIDCannonFR;
     public Encoder encLeft, encRight;
     public Piston rollerPiston, cannonPiston;
-    public boolean isShooting = false;
+    public boolean isShooting = false; 
     //test to find number of ticks needed to fully turn the cam
     private int camTicks = 1800;
-    private double Kp = 0.05, Ki = 0.01, Kd=0.01; 
+    private double Kp = 0.05, Ki = 0.01, Kd=0.0; 
     private double leftVError, leftVErrorSum, leftVErrorChange, rightVError, rightVErrorSum, rightVErrorChange, leftOutput, rightOutput; 
     public Cannon() {
     	encLeft = new Encoder(RobotMap.encLeftPort1, RobotMap.encLeftPort2);
     	encRight = new Encoder (RobotMap.encRightPort1, RobotMap.encRightPort2);
+    	
         cannonFL = new Talon(RobotMap.cannonFLPort);
         cannonFR = new Talon(RobotMap.cannonFRPort);
-        //PIDCannonFL = new PIDController(0.05, 0.0, 0.0, encLeft, cannonFL);
-        //PIDCannonFR = new PIDController(0.05, 0.0, 0.0, encRight, cannonFR);
+        
+        PIDCannonFL = new PIDController(0.05, 0.0, 0.0, encLeft, cannonFL);
+        PIDCannonFR = new PIDController(0.05, 0.0, 0.0, encRight, cannonFR);
+        
         roller = new Talon(RobotMap.rollerPort);
         rollerPiston = new Piston(RobotMap.rollerSolPort1, RobotMap.rollerSolPort2);
         cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2);
         camTalon = new CANTalon(RobotMap.camTalonPort);
         camTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        
+        encLeft.setDistancePerPulse(0.002);
+        encRight.setDistancePerPulse(0.002);
     }
 
     // Put methods for controlling this subsystem
@@ -43,16 +49,14 @@ public class Cannon extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	encLeft.setDistancePerPulse(0.147);
-    	encRight.setDistancePerPulse(0.147);
     }
 
     public void spinWheels(double velocity) {
         //positive velocity is to shoot
         //negative velocity is to acquire
     	
-    	//PIDCannonFL.setSetpoint(-velocity);
-    	//PIDCannonFR.setSetpoint(velocity);
+    	PIDCannonFL.setSetpoint(-velocity);
+    	PIDCannonFR.setSetpoint(velocity);
     	//TO-DO:
     	
     		leftVErrorChange = leftVError - (velocity - encLeft.getRate()); 
