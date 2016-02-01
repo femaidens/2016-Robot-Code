@@ -1,8 +1,11 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+//import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,15 +17,20 @@ public class Piston extends Subsystem {
     // here. Call these from Commands.
 	
 	DoubleSolenoid actuator, actuator2;
+	Talon shootServo;
+	Timer timer = new Timer(); 
 	
-	public Piston (int port1, int port2, int port3, int port4) {
+	//public Piston (int port1, int port2, int port3, int port4) {
+	public Piston (int port1, int port2, int port3) {
 		actuator = new DoubleSolenoid(port1, port2);
-		actuator2 = new DoubleSolenoid(port3, port4);
+		shootServo = new Talon(port3);
+		//actuator2 = new DoubleSolenoid(port3, port4);
+		
 	}
 	
  
 	//method to extend the piston
-	public void extendFull() {
+	public void extend() {
 		actuator.set(DoubleSolenoid.Value.kForward);
 	}
 	
@@ -31,8 +39,9 @@ public class Piston extends Subsystem {
 		actuator.set(DoubleSolenoid.Value.kReverse);
 	}
 	
-	public void extendHalf() {
-		actuator2.set(DoubleSolenoid.Value.kForward);
+	public void lower() {
+		while(timer.get() < 0.2)
+			shootServo.set(0.3);
 	}
 	//method to return the value of the piston
 	public Value get() {
