@@ -62,6 +62,7 @@ public class Cannon extends Subsystem {
     		leftVErrorChange = leftVError - (velocity - encLeft.getRate()); 
     		leftVError = velocity - encLeft.getRate();
     		leftVErrorSum += leftVError;
+    		
     		rightVErrorChange = rightVError - (velocity - encRight.getRate()); 
     		rightVError = velocity - encRight.getRate();
     		rightVErrorSum += rightVError;
