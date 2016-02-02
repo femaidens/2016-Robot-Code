@@ -20,6 +20,8 @@ public class Drivetrain extends Subsystem {
 	private static double Kp = 0.05;
 	private static double Ki = 0.01;
 	private static double Kd=0.0; 
+	private static double Kpwm; 
+	//needs the actual pwm constant 
 	 
 	public static CANTalon frontLeft= new CANTalon(RobotMap.frontLeftPort); 
     public static CANTalon frontRight= new CANTalon(RobotMap.frontRightPort); 
@@ -42,12 +44,13 @@ public class Drivetrain extends Subsystem {
     public static PIDController pidFR = new PIDController(Kp, Ki, Kd, encFR, frontRight);
     public static PIDController pidRL = new PIDController(Kp, Ki, Kd, encRL, rearLeft);
     public static PIDController pidRR = new PIDController(Kp, Ki, Kd, encRR, rearRight);
+    private double flError, flErrorChange, flErrorSum, flOutput;
+    private double frError, frErrorChange, frErrorSum, frOutput;
+    private double rlError, rlErrorChange, rlErrorSum, rlOutput;
+    private double rrError, rrErrorChange, rrErrorSum, rrOutput;
+    private double velocity; //need actual velocity of the talons
        
    public void  Drive(){
-	   
-	   final double velocity= 0;
-	   //need actual velocity of the talons 
-	   //0 is just a place holder
 	   
 	   encFL.setDistancePerPulse(.07);
 	   encFR.setDistancePerPulse(.07);
@@ -57,33 +60,36 @@ public class Drivetrain extends Subsystem {
 	   pidFL.setSetpoint(velocity);
 	   pidFR.setSetpoint(velocity);
 	   pidRL.setSetpoint(velocity);
-	   pidRR.setSetpoint(velocity);
-	   
-	   final double flError, flErrorChange, flErrorSum;
-	   final double frError, frErrorChange, frErrorSum;
-	   final double rlError, rlErrorChange, rlErrorSum;
-	   final double rrError, rrErrorChange, rrErrorSum;
-	   
+	   pidRR.setSetpoint(velocity);	   
 	  
 	   flError = (velocity - encFL.getRate());
-	   flErrorChange = flError - (velocity - encFL.getRate()); 
-	   //flErrorSum += flError; 
+	   flErrorChange = (flError - (velocity - encFL.getRate())); 
+	   flErrorSum += flError; 
 			   
 	   frError = (velocity - encFR.getRate());
 	   frErrorChange = frError - (velocity - encFR.getRate());
-	   //frErrorSum += frError;
+	   frErrorSum += frError;
 	   
+	   rlError = (velocity - encRL.getRate());
+	   rlErrorChange = rlError - (velocity - encRL.getRate());
+	   rlErrorSum += rlError;
 	   
+	   rrError = (velocity - encRR.getRate());
+	   rrErrorChange = rrError - (velocity - encRR.getRate());
+	   rrErrorSum += rrError;
 	   
+	   flOutput += Kpwm*(Kp*flError + Ki*flErrorSum + Kd*flErrorChange);
+	   frOutput += Kpwm*(Kp*frError + Ki*frErrorSum + Kd*frErrorChange);
+	   rlOutput += Kpwm*(Kp*rlError + Ki*rlErrorSum + Kd*rlErrorChange);
+	   rrOutput += Kpwm*(Kp*rrError + Ki*rrErrorSum + Kd*rrErrorChange);
 	   
-	   
-	   
-	  
-	   
-	  
+	   frontLeft.set(flOutput);
+	   frontRight.set(frOutput);
+	   rearLeft.set(rlOutput);
+	   rearRight.set(rrOutput);
    }
 	
-    
+  
     public void drive(){
 		double leftVal= -leftJoy.getY();
 		double rightVal= -rightJoy.getY(); 
@@ -114,7 +120,8 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    }    
+    }
+
     
 }
 

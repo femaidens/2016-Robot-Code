@@ -22,6 +22,8 @@ public class Cannon extends Subsystem {
     //test to find number of ticks needed to fully turn the cam
     private int camTicks = 1800;
     private double Kp = 0.05, Ki = 0.01, Kd=0.0; 
+    private double Kpwm;
+    //needs the actual pwm constant
     private double leftVError, leftVErrorSum, leftVErrorChange, rightVError, rightVErrorSum, rightVErrorChange, leftOutput, rightOutput; 
     public Cannon() {
     	encLeft = new Encoder(RobotMap.encLeftPort1, RobotMap.encLeftPort2);
@@ -67,8 +69,8 @@ public class Cannon extends Subsystem {
     		rightVError = velocity - encRight.getRate();
     		rightVErrorSum += rightVError;
     		
-    		leftOutput += -(Kp*leftVError + Ki*leftVErrorSum + Kd*leftVErrorChange); 
-    		rightOutput += Kp*rightVError + Ki*rightVErrorSum + Kd*rightVErrorChange; 
+    		leftOutput += -Kpwm*(Kp*leftVError + Ki*leftVErrorSum + Kd*leftVErrorChange); 
+    		rightOutput += Kpwm*(Kp*rightVError + Ki*rightVErrorSum + Kd*rightVErrorChange);
     	
     		cannonFL.set(leftOutput);
     		cannonFR.set(rightOutput);
