@@ -3,6 +3,10 @@ package org.usfirst.frc.team2265.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team2265.robot.commands.ExtendClimber;
+import org.usfirst.frc.team2265.robot.commands.LiftRobot;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 /*import org.usfirst.frc.team2265.robot.commands.Acquire;
@@ -48,6 +52,9 @@ public class OI {
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
 	public void bindButtons(){
+		extendArm.whenPressed(new ExtendClimber());
+		lift.whenPressed(new LiftRobot());
+		//ADD AT SOME POINT : LOWER, IF NEEDED
 			//shooting
 			/*shoot.whenPressed(new Shoot(0.4));
 			shoot.whenPressed(new StopCannon());
