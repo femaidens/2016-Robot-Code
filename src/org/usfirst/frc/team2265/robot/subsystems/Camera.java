@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.util.ArrayList;
 
 /**
@@ -16,7 +18,7 @@ public class Camera extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	table = NetworkTable.getTable("key"); //key is a String--I think it's the name of the table
+    	table = NetworkTable.getTable("SmartDashboard"); //key is a String--I think it's the name of the table
     }
     
     public void autonCamera(){
@@ -31,13 +33,17 @@ public class Camera extends Subsystem {
     }
     
     public void teleopCamera(){
-    	try{
-    		table.getValue("some parameter--to be determined", values);
+    	//try{
+    		table.getValue("BLOB_COUNT", values); // Gets value from Roborealm to NetworkTable. 
+    		table.putValue("BLOB_COUNT", values); 
+    		//table.getNumber("BLOB_COUNT", values.get(0)); 
+    		table.putNumber("Blob Count: ", values.get(0)); // Puts value from Roborealm on NetworkTable to view in Outline Viewer. 
+    		SmartDashboard.putNumber("Blob Count: ", values.get(0)); // Displays Blob count value on SmartDashboard. 
     		
-    	}
+    	/*}
     	catch(Exception e){
     		e.printStackTrace();
-    	}
+    	} */
     }
     
   //in another method(s):
