@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -48,6 +49,16 @@ public class Drivetrain extends Subsystem {
     
     public Value get() {
     	return gearShifter.get(); 
+    }
+    
+    public void collision() {
+    	Timer timer = new Timer();
+    	timer.start();
+    	while (timer.get() <= 5.5) {    
+    	}
+    	while (timer.get() < 7.5) {
+    		drive(-0.3, -0.3);
+    	}
     }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.    
