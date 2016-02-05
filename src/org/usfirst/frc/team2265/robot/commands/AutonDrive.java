@@ -2,16 +2,17 @@ package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Drive extends Command {
+public class AutonDrive extends Command {
 
     double x, y; 
     
-	public Drive(double xDir, double yDir) {
+	public AutonDrive(double xDir, double yDir) {
         requires(Robot.driveTrain); 
         x= xDir; 
         y= yDir; 
@@ -23,6 +24,7 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Timer.getFPGATimestamp();
     	Robot.driveTrain.drive(x, y); 
     }
 

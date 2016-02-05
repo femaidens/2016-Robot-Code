@@ -6,13 +6,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LowBarAuton extends CommandGroup {
+public class LowBarAutonCurveHigh extends CommandGroup {
     
-    public  LowBarAuton() {
+    public  LowBarAutonCurveHigh() {
+        
+    	Timer timer = new Timer();
+    	while(timer.get()<=5){
+    		addSequential(new AutonDrive(0.5,0.5));
+    	}
+    	addParallel(new ShiftToPower());
+    	//addParallel(new Shoot());
+    	//addSequential(new CurveHigh());
+    	Timer.delay(3.0);
+    	//addSequential(new StopCannon());
     	
-    	addSequential(new Drive(0.5, 0.5)); 
-    	Timer.delay(1000);
-        // Add Commands here:
+    	
+    	
+    	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
