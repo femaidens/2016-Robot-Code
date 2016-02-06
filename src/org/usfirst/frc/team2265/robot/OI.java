@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 
 import org.usfirst.frc.team2265.robot.commands.Acquire;
+import org.usfirst.frc.team2265.robot.commands.Curve;
 //import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.RollerToAcq;
 import org.usfirst.frc.team2265.robot.commands.RollerToGate;
@@ -36,6 +37,8 @@ public class OI {
 	Button rollerToAcq = new JoystickButton(rightJoy, 2);//thumb button
 	Button rollerToGate = new JoystickButton(leftJoy, 1); //left trigger	
 	
+	Button curveLeft = new JoystickButton(atkJoy, 5);
+	Button curveRight = new JoystickButton(atkJoy,6);
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
@@ -47,6 +50,10 @@ public class OI {
 			rollerToShoot.whenPressed(new RollerToShoot());
 			rollerToAcq.whenPressed(new RollerToAcq());
 			rollerToGate.whenPressed(new RollerToGate());
+			
+			curveLeft.whenPressed(new Curve(false));
+			curveRight.whenPressed(new Curve(true));
+			
 	}
     
     //// TRIGGERING COMMANDS WITH BUTTONS
