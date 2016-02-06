@@ -11,15 +11,17 @@ public class LowBarAutonCurveLow extends CommandGroup {
     public  LowBarAutonCurveLow() {
     	
     	Timer timer = new Timer();
-    	while(timer.get()<=5){
+    	timer.reset();
+    	timer.start();
+    	while(timer.get() < 5.0){
     		addSequential(new AutonDrive(0.5,0.5));
     	}
-    	addParallel(new ShiftToPower());
-    	//addParallel(new Shoot());
+    	addSequential(new ShiftToPower());
     	//addSequential(new CurveLow());
     	Timer.delay(3.0);
     	//addSequential(new StopCannon());
-   
+
+    	timer.stop(); 
     	
     	
     	// Add Commands here:
