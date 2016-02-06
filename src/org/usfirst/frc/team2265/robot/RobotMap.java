@@ -17,7 +17,6 @@ public class RobotMap {
 	
 	//talon ports
 	public static final int winchPort = 99; 
-	public static final int liftPinLeftPort = 99;
-	public static final int liftPinRightPort = 99;
+	public static final int liftPinPort = 99;
     // public static int rangefinderModule = 1;
 }

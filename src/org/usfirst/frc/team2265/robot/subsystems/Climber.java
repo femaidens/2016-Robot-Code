@@ -11,12 +11,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Climber extends Subsystem {
 	
-	private Talon winch, liftPinLeft, liftPinRight; 
+	private Talon winch, liftPin;
 	private Timer timer;
 	public Climber(){
 		winch = new Talon(RobotMap.winchPort); 
-		liftPinLeft = new Talon(RobotMap.liftPinLeftPort);
-		liftPinRight = new Talon(RobotMap.liftPinRightPort);
+		liftPin = new Talon(RobotMap.liftPinPort);
 		timer = new Timer();
 	}
     
@@ -25,8 +24,7 @@ public class Climber extends Subsystem {
 	public void extend() {
 		timer.reset();
 		while(timer.get() <= 0.1)	{
-			liftPinLeft.set(0.5);
-			liftPinRight.set(0.5);
+			liftPin.set(0.5);
 		}
 			
 	}
