@@ -12,8 +12,12 @@ public class LowBarAutonCurveLow extends CommandGroup {
     	
     	Timer timer = new Timer();
     	timer.reset();
+    	
     	timer.start();
-    	while(timer.get() < 5.0){
+    	
+    	while (timer.get() < 0.5) {new AutonDrive (-1.0,-1.0);}
+    	
+    	while(timer.get() < 5.5){
     		addSequential(new AutonDrive(0.5,0.5));
     	}
     	addSequential(new ShiftToPower());

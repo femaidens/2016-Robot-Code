@@ -12,9 +12,13 @@ public class DriveOnlyAuton extends CommandGroup {
     	Timer timer = new Timer();
     	timer.reset();
     	timer.start();
+    	while (timer.get() < 0.5) {
+    		new AutonDrive (-1.0,-1.0);
+    	}
     	//addSequential(new Drive(0.5, 0.5));
-        Timer.delay(3.0);
+    	Timer.delay(3.0);
        // addSequential(new Drive(0.0,0.0));
+    	timer.stop();
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
