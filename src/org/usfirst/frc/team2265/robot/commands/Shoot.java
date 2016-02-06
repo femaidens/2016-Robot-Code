@@ -3,6 +3,7 @@ package org.usfirst.frc.team2265.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 
 import org.usfirst.frc.team2265.robot.Robot;
+import org.usfirst.frc.team2265.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -30,7 +31,7 @@ public class Shoot extends Command {
     		Robot.cannon.spinWheels(v*1.25);
     	if (Robot.cannon.isLow)
     		Robot.cannon.spinWheels(v*0.75);
-    	Timer.delay(1.0);
+    	Timer.delay(RobotMap.wheelDelay);
     	Robot.cannon.turnCam();
     }
 
