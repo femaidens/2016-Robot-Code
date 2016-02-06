@@ -20,7 +20,7 @@ public class Cannon extends Subsystem {
     private int shootTicks = 1800;
     private int acquireTicks = 1800;
     private int gateTicks = 1800;
-    public boolean isHigh, isLow,atStart; 
+    public boolean isHigh, isLow;
     
 
     public Cannon() {
@@ -28,7 +28,7 @@ public class Cannon extends Subsystem {
         cannonFR = new Talon(RobotMap.cannonFRPort);
         roller = new Talon(RobotMap.rollerPort);
         rollerPos = new CANTalon(RobotMap.rollerPosPort);
-        atStart = true;
+        isLow = true;
         cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3);
        // cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3, RobotMap.cannonSolPort4);
         camTalon = new CANTalon(RobotMap.camTalonPort);
@@ -79,14 +79,12 @@ public class Cannon extends Subsystem {
     	cannonPiston.extend();
     	isHigh = true; 
     	isLow = false; 
-    	atStart = false;
     }
     
     public void lowerCannon() {
     	cannonPiston.retract();
     	isLow = true;
     	isHigh = false; 
-    	atStart = true;
     }
     
 
