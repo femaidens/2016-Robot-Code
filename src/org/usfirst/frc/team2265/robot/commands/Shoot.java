@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2265.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 import org.usfirst.frc.team2265.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,6 +30,8 @@ public class Shoot extends Command {
     		Robot.cannon.spinWheels(v*1.25);
     	if (Robot.cannon.isLow)
     		Robot.cannon.spinWheels(v*0.75);
+    	Timer.delay(1.0);
+    	Robot.cannon.turnCam();
     }
 
     // Make this return true when this Command no longer needs to run execute()
