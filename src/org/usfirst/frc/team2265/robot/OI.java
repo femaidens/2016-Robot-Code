@@ -41,6 +41,8 @@ public class OI {
 	Button rollerToAcq = new JoystickButton(rightJoy, 2);//thumb button
 	Button rollerToGate = new JoystickButton(leftJoy, 1); //left trigger
 	Button aim = new JoystickButton(atkJoy, 3); //button x
+	Button curveLeft = new JoystickButton(atkJoy, 5); //left button above trigger
+	Button curveRight = new JoystickButton(atkJoy,6); //right button above trigger
 	//climbing
 	Button extendArm = new JoystickButton(rightJoy, 5); //right button 5
 	Button lift = new JoystickButton(rightJoy, 6); //right button 6
@@ -64,7 +66,8 @@ public class OI {
 			rollerToAcq.whenPressed(new RollerToAcq());
 			rollerToGate.whenPressed(new RollerToGate());
 			aim.whenPressed(new Aim());
-			
+			curveLeft.whenPressed(new Curve(false));
+			curveRight.whenPressed(new Curve(true)); 
 			//driving
 			toPower.whenPressed(new ShiftToPower());
 			toSpeed.whenPressed(new ShiftToSpeed());
