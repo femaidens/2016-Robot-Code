@@ -1,10 +1,16 @@
 
 package org.usfirst.frc.team2265.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+
+import java.util.ArrayList;
+
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.subsystems.Camera;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
@@ -26,6 +32,8 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     SendableChooser chooser;
     Camera cammy; 
+    NetworkTable table;
+    public static Solenoid ledRing; 
 
     /**
      * This function is run when the robot is first started up and should be
@@ -36,8 +44,10 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
-        cammy= new Camera(); 
+        SmartDashboard.putData("Auto mode", chooser); 
+        table = NetworkTable.getTable("SmartDashboard");
+        ledRing = new Solenoid(7);
+        oi.bindButtons();
     }
 	
 	/**
@@ -64,6 +74,7 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
         autonomousCommand = (Command) chooser.getSelected();
+        ledRing.set(true);
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -93,14 +104,22 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        ledRing.set(true);
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-        cammy.teleopCamera(); 
+        Scheduler.getInstance().run(); 
+         
+        double height= table.getNumber("IMAGE_HEIGHT", 10.0);
+        System.out.println(height); 
+        SmartDashboard.putNumber("HEIGHT", height);
+        table.containsKey("IMAGE_HEIGHT"); 
+        
+        
+        
     }
     
     /**
