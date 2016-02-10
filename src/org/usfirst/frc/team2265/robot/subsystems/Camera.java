@@ -23,6 +23,8 @@ public class Camera extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     	//key is a String--I think it's the name of the table
+
+    	table = NetworkTable.getTable("SmartDashboard"); 
     }
     
     public void autonCamera(){
@@ -37,6 +39,7 @@ public class Camera extends Subsystem {
     }
     
     public void teleopCamera(){
+
     	try{ 	
     		/* 2 is the default value--blob count will be set to 2 if it is null
     		 * NOTE: whether or not blob count = 2 is a good indicator of whether we're having 
@@ -47,7 +50,7 @@ public class Camera extends Subsystem {
     		//values.add(); 
     		//System.out.println(values.get(0));
     		SmartDashboard.putData("BLECH", (Sendable) values.get(0));  
-    		
+
     	}
     	catch (IllegalArgumentException e){
     		System.out.println("getValue has issues");
@@ -57,6 +60,7 @@ public class Camera extends Subsystem {
     	catch (Exception e){
     		e.printStackTrace();
     	} 
+
     }
 }
 
