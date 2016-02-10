@@ -34,10 +34,10 @@ public class Drivetrain extends Subsystem {
     	TankDrive.tankDrive(x, y); 
     }
     public void shiftToSpeed(){
-    	gearShifter.set(DoubleSolenoid.Value.kForward); 
+    	gearShifter.set(DoubleSolenoid.Value.kReverse); 
     }
     public void shiftToPower(){
-    	gearShifter.set(DoubleSolenoid.Value.kReverse);
+    	gearShifter.set(DoubleSolenoid.Value.kForward);
     }
     public boolean isDriving(){
     	if(frontRight.get() > 0 ||frontRight.get()< 0) {
