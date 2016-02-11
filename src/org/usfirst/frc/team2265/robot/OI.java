@@ -41,9 +41,10 @@ public class OI {
     // commands the same as any other Button.
 	public void bindButtons(){
 			shoot.whenPressed(new Shoot(0.4));
-			shoot.whenPressed(new StopCannon());
+			shoot.whenReleased(new StopCannon());
 			toggleCannonPos.whenPressed(new ToggleCannon());
 			acquire.whileHeld(new Acquire());
+			acquire.whenReleased(new StopCannon());
 			rollerToShoot.whenPressed(new RollerToShoot());
 			rollerToAcq.whenPressed(new RollerToAcq());
 			rollerToGate.whenPressed(new RollerToGate());

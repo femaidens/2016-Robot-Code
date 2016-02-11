@@ -24,14 +24,14 @@ public class RobotMap {
 			
 		//Talon Ports
 		public static int cannonFLPort = 0;
-		public static int cannonFRPort = 99;
-		public static int rollerPort = 99; 
-		public static int camTalonPort = 99;
-		public static int rearLeftPort = 99;
-		public static int rearRightPort = 99;
-		public static int frontLeftPort = 99;
-		public static int frontRightPort = 99;
-		public static int rollerPosPort = 99;
+		public static int cannonFRPort = 14;
+		public static int rollerPort = 0; 
+		public static int camTalonPort = 0;
+		public static int rearLeftPort = 0;
+		public static int rearRightPort = 0;
+		public static int frontLeftPort = 0;
+		public static int frontRightPort = 0;
+//		public static int rollerPosPort = 99; 
 		
 		//Sensor Ports
 		public static int gyroPort = 0; //analog

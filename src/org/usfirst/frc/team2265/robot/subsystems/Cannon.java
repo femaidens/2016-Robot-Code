@@ -27,7 +27,7 @@ public class Cannon extends Subsystem {
         cannonFL = new Talon(RobotMap.cannonFLPort);
         cannonFR = new Talon(RobotMap.cannonFRPort);
         roller = new Talon(RobotMap.rollerPort);
-        rollerPos = new CANTalon(RobotMap.rollerPosPort);
+        // = new CANTalon(RobotMap.rollerPosPort);
         atStart = true;
         cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3);
        // cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3, RobotMap.cannonSolPort4);
