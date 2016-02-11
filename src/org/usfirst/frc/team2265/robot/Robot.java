@@ -49,9 +49,17 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
 
         SmartDashboard.putData("Auto mode", chooser); 
-        table = NetworkTable.getTable("SmartDashboard");
+        table = NetworkTable.getTable("GRIP/FirstReport");
         ledRing = new Solenoid(7);
         oi.bindButtons();
+        
+        double[] defaultVals= {9.0,2.0};  
+        
+        double[] width= table.getNumberArray("width", defaultVals);
+        System.out.print(width[0]); 
+        SmartDashboard.putNumber("width", width[0]);
+        table.containsKey("width"); 
+        
     }
 	
 	/**
@@ -117,11 +125,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run(); 
          
-        double height= table.getNumber("IMAGE_HEIGHT", 10.0);
-        System.out.println(height); 
-        SmartDashboard.putNumber("HEIGHT", height);
-        table.containsKey("IMAGE_HEIGHT"); 
-        
+      
         
         
     }
