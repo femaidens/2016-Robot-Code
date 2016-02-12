@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
@@ -34,7 +35,7 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser;
 
     Camera cammy; 
-    NetworkTable table;
+    private final NetworkTable table= NetworkTable.getTable("GRIP");
     public static Solenoid ledRing; 
 
 
@@ -47,18 +48,15 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
-
         SmartDashboard.putData("Auto mode", chooser); 
-        table = NetworkTable.getTable("GRIP/FirstReport");
         ledRing = new Solenoid(7);
         oi.bindButtons();
-        
-        double[] defaultVals= {9.0,2.0};  
-        
-        double[] width= table.getNumberArray("width", defaultVals);
-        System.out.print(width[0]); 
-        SmartDashboard.putNumber("width", width[0]);
-        table.containsKey("width"); 
+        /*try {
+        	new ProcessBuilder("/home/lvuser").inheritIO().start(); 
+        } 
+        catch(IOException e){
+        	e.printStackTrace();
+        } */
         
     }
 	
@@ -123,11 +121,16 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        Scheduler.getInstance().run(); 
+        Scheduler.getInstance().run();  
+        
+        //double[] width= new double[2]; 
+        double [] defaultVals= new double[1]; 
+        double[] width= table.getNumberArray("width", defaultVals); 
+        
+        System.out.print( " " + width); 
+        SmartDashboard.putNumber("width", width[0]);
+        table.containsKey("width"); 
          
-      
-        
-        
     }
     
     /**
