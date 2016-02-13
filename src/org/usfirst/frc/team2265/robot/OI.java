@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2265.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,13 +11,20 @@ import org.usfirst.frc.team2265.robot.commands.LiftRobot;
 import edu.wpi.first.wpilibj.Joystick;
 
 /*import org.usfirst.frc.team2265.robot.commands.Acquire;
+=======
+
+import org.usfirst.frc.team2265.robot.commands.Collision;
+>>>>>>> refs/remotes/origin/Drivetrain
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+<<<<<<< HEAD
 import org.usfirst.frc.team2265.robot.commands.RollerToAcq;
 import org.usfirst.frc.team2265.robot.commands.RollerToGate;
 import org.usfirst.frc.team2265.robot.commands.RollerToShoot;
 import org.usfirst.frc.team2265.robot.commands.Shoot;
 import org.usfirst.frc.team2265.robot.commands.StopCannon;
 import org.usfirst.frc.team2265.robot.commands.ToggleCannon;*/
+
+import org.usfirst.frc.team2265.robot.commands.ToggleMode;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -91,5 +99,15 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+	
+	public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
+	public static Button toggleMode = new JoystickButton(atkJoy, 2);
+	public static Button collision = new JoystickButton(atkJoy,11);
+	
+	public void bindButtons() {
+		toggleMode.whenPressed(new ToggleMode());
+		collision.whenPressed(new Collision());
+		
+	}
 }
 

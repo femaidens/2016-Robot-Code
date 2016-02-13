@@ -6,6 +6,7 @@ package org.usfirst.frc.team2265.robot;
  * floating around.
  */
 public class RobotMap {
+<<<<<<< HEAD
 	public static int leftJoyPort = 0;
 	public static int rightJoyPort = 1;
 	public static int atkJoyPort = 2;
@@ -45,4 +46,5 @@ public class RobotMap {
 	public static final int winchRightPort = 99;
 	public static final int liftPort = 99;
     // public static int rangefinderModule = 1;
+
 }

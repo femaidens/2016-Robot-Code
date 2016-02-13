@@ -1,13 +1,17 @@
 
 package org.usfirst.frc.team2265.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+<<<<<<< HEAD
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
+=======
+>>>>>>> refs/remotes/origin/Drivetrain
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -26,9 +30,10 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Climber climber;
 	public static Drivetrain drivetrain;
-	
+
     Command autonomousCommand;
     SendableChooser chooser;
+    Compressor compressy; 
 
     /**
      * This function is run when the robot is first started up and should be
@@ -41,6 +46,10 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        compressy= new Compressor(); 
+        driveTrain= new Drivetrain();
+        compressy.start(); 
+        oi.bindButtons(); 
     }
 	
 	/**
@@ -103,6 +112,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        driveTrain.drive(); 
     }
     
     /**
