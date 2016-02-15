@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -31,14 +32,16 @@ public class Drivetrain extends Subsystem {
     
     public Drivetrain(){
     	frontRight.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder); 
+    	frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	//frontRight.configEncoderCodesPerRev(255);
     }
 
 	public void drive(){
 		double leftVal= -leftJoy.getY();
-		double rightVal= -rightJoy.getY(); 
+		double rightVal= 0.1; 
 		TankDrive.tankDrive(leftVal, rightVal); 
-		SmartDashboard.putNumber("Encoder Values", frontRight.getEncVelocity());
+		SmartDashboard.putNumber("Right Encoder Values", frontRight.getEncVelocity());
+		SmartDashboard.putNumber("Left Encoder Vals" , frontLeft.getEncVelocity());
 	}	
     public void drive (double x, double y){
     	TankDrive.tankDrive(x, y); 
@@ -48,6 +51,7 @@ public class Drivetrain extends Subsystem {
     }
     public void shiftToPower(){
     	gearShifter.set(DoubleSolenoid.Value.kForward);
+    	
     }
     public boolean isDriving(){
     	if(frontRight.get() > 0 ||frontRight.get()< 0) {
@@ -59,7 +63,10 @@ public class Drivetrain extends Subsystem {
     public Value get() {
     	return gearShifter.get(); 
     }
-    
+    public void gogogo(double speed){
+    	frontRight.set(speed);
+    	Timer.delay(50000); 
+    }
     public void collision() {
     	Timer timer = new Timer();
     	timer.start();
