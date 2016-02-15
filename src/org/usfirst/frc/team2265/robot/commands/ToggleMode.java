@@ -23,14 +23,14 @@ public class ToggleMode extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if (Robot.driveTrain.get().equals(Value.kReverse)|| Robot.driveTrain.get().equals(Value.kOff)){
+    	if (Robot.driveTrain.get().equals(Value.kForward)|| Robot.driveTrain.get().equals(Value.kOff)){
     		Robot.driveTrain.shiftToSpeed(); 
     		shifted = true;
     		return;
     		
     	}
     	
-    	if(Robot.driveTrain.get().equals(Value.kForward)|| Robot.driveTrain.get().equals(Value.kOff)){
+    	if(Robot.driveTrain.get().equals(Value.kReverse)|| Robot.driveTrain.get().equals(Value.kOff)){
     		Robot.driveTrain.shiftToPower(); 
     		shifted = true; 
     		return;
