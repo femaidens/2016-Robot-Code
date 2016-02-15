@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2265.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -23,8 +24,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static Drivetrain driveTrain; 
-
+	public static Drivetrain driveTrain;  
     Command autonomousCommand;
     SendableChooser chooser;
     Compressor compressy; 
@@ -42,7 +42,8 @@ public class Robot extends IterativeRobot {
         compressy= new Compressor(); 
         driveTrain= new Drivetrain();
         compressy.start(); 
-        oi.bindButtons(); 
+        oi.bindButtons();
+        
     }
 	
 	/**
