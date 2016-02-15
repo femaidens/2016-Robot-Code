@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team2265.robot.commands.Collision;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.ToggleMode;
 
@@ -41,9 +42,11 @@ public class OI {
 	
 	public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
 	public static Button toggleMode = new JoystickButton(atkJoy, 2);
+	public static Button collision = new JoystickButton(atkJoy,11);
 	
 	public void bindButtons() {
 		toggleMode.whenPressed(new ToggleMode());
+		collision.whenPressed(new Collision());
 		
 	}
 }
