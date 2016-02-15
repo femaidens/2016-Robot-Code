@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 
 /**
@@ -37,56 +38,63 @@ public class Drivetrain extends Subsystem {
    
     public static Encoder encFL = new Encoder(RobotMap.encLeftPort1,RobotMap.encLeftPort2);
     public static Encoder encFR = new Encoder(RobotMap.encRightPort1, RobotMap.encRightPort2); 
-    public static Encoder encRL = new Encoder(RobotMap.encLeftPort1, RobotMap.encLeftPort2);
-    public static Encoder encRR = new Encoder(RobotMap.encRightPort1, RobotMap.encRightPort2);
+    //public static Encoder encRL = new Encoder(RobotMap.encLeftPort1, RobotMap.encLeftPort2);
+    //public static Encoder encRR = new Encoder(RobotMap.encRightPort1, RobotMap.encRightPort2);
    
     public static PIDController pidFL = new PIDController(Kp, Ki, Kd, encFL, frontLeft);
     public static PIDController pidFR = new PIDController(Kp, Ki, Kd, encFR, frontRight);
-    public static PIDController pidRL = new PIDController(Kp, Ki, Kd, encRL, rearLeft);
-    public static PIDController pidRR = new PIDController(Kp, Ki, Kd, encRR, rearRight);
+    //public static PIDController pidRL = new PIDController(Kp, Ki, Kd, encRL, rearLeft);
+    //public static PIDController pidRR = new PIDController(Kp, Ki, Kd, encRR, rearRight);
     private double flError, flErrorChange, flErrorSum, flOutput;
     private double frError, frErrorChange, frErrorSum, frOutput;
-    private double rlError, rlErrorChange, rlErrorSum, rlOutput;
-    private double rrError, rrErrorChange, rrErrorSum, rrOutput;
-    private double velocity; //need actual velocity of the talons
+    //private double rlError, rlErrorChange, rlErrorSum, rlOutput;
+    //private double rrError, rrErrorChange, rrErrorSum, rrOutput;
+    //private double velocity; //need actual velocity of the talons
        
-   public void  Drive(){
+   public void  PIDdrive(double leftVelocity, double rightVelocity){
 	   
 	   encFL.setDistancePerPulse(.07);
 	   encFR.setDistancePerPulse(.07);
-	   encRL.setDistancePerPulse(.07);
-	   encRR.setDistancePerPulse(.07);
+	   //encRL.setDistancePerPulse(.07);
+	   //encRR.setDistancePerPulse(.07);
 	   
-	   pidFL.setSetpoint(velocity);
-	   pidFR.setSetpoint(velocity);
-	   pidRL.setSetpoint(velocity);
-	   pidRR.setSetpoint(velocity);	   
+	   pidFL.setSetpoint(leftVelocity);
+	   pidFR.setSetpoint(rightVelocity);
+	   //pidRL.setSetpoint(velocity);
+	   //pidRR.setSetpoint(velocity);	   
 	  
-	   flError = (velocity - encFL.getRate());
-	   flErrorChange = (flError - (velocity - encFL.getRate())); 
+	   flError = (leftVelocity - encFL.getRate());
+	   flErrorChange = (flError - (leftVelocity - encFL.getRate())); 
 	   flErrorSum += flError; 
 			   
-	   frError = (velocity - encFR.getRate());
-	   frErrorChange = frError - (velocity - encFR.getRate());
+	   frError = (rightVelocity - encFR.getRate());
+	   frErrorChange = frError - (rightVelocity - encFR.getRate());
 	   frErrorSum += frError;
 	   
-	   rlError = (velocity - encRL.getRate());
-	   rlErrorChange = rlError - (velocity - encRL.getRate());
-	   rlErrorSum += rlError;
+	   //rlError = (velocity - encRL.getRate());
+	   //rlErrorChange = rlError - (velocity - encRL.getRate());
+	   //rlErrorSum += rlError;
 	   
-	   rrError = (velocity - encRR.getRate());
+	   /*rrError = (velocity - encRR.getRate());
 	   rrErrorChange = rrError - (velocity - encRR.getRate());
-	   rrErrorSum += rrError;
+	   rrErrorSum += rrError; */
 	   
 	   flOutput += Kpwm*(Kp*flError + Ki*flErrorSum + Kd*flErrorChange);
 	   frOutput += Kpwm*(Kp*frError + Ki*frErrorSum + Kd*frErrorChange);
-	   rlOutput += Kpwm*(Kp*rlError + Ki*rlErrorSum + Kd*rlErrorChange);
-	   rrOutput += Kpwm*(Kp*rrError + Ki*rrErrorSum + Kd*rrErrorChange);
+	   //rlOutput += Kpwm*(Kp*rlError + Ki*rlErrorSum + Kd*rlErrorChange);
+	   //rrOutput += Kpwm*(Kp*rrError + Ki*rrErrorSum + Kd*rrErrorChange);
 	   
 	   frontLeft.set(flOutput);
 	   frontRight.set(frOutput);
-	   rearLeft.set(rlOutput);
-	   rearRight.set(rrOutput);
+	   rearLeft.set(flOutput);
+	   rearRight.set(frOutput);
+	   //rearLeft.set(rlOutput);
+	   //rearRight.set(rrOutput);
+	   
+	   SmartDashboard.putNumber("Left Encoder", encFL.getRate());
+	   SmartDashboard.putNumber("Right Encoder" , encFR.getRate());
+	   SmartDashboard.putNumber("Left PID Value:", flOutput);
+	   SmartDashboard.putNumber("Right PID Value", frOutput);
    }
 	
   
