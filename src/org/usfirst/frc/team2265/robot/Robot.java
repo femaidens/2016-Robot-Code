@@ -57,7 +57,6 @@ public class Robot extends IterativeRobot {
         catch(IOException e){
         	e.printStackTrace();
         } */
-        
     }
 	
 	/**
@@ -85,6 +84,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         autonomousCommand = (Command) chooser.getSelected();
         ledRing.set(true);
+
+        System.out.println("AUTON" + table.toString());
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -115,6 +116,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         ledRing.set(true);
+        System.out.println("TELEOP:" + table.toString());
     }
 
     /**
