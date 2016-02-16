@@ -17,13 +17,13 @@ public class Piston extends Subsystem {
     // here. Call these from Commands.
 	
 	DoubleSolenoid actuator, actuator2;
-	Talon shootServo;
 	Timer timer = new Timer(); 
 	
 	public Piston (int port1, int port2, int port3, int port4) {
-	//public Piston (int port1, int port2, int port3) {
+	//public Piston (int port1, int port2) {
 		actuator = new DoubleSolenoid(port1, port2);
 		actuator2 = new DoubleSolenoid(port3, port4);
+		System.out.println("Piston created." );
 		
 	}
 	
@@ -31,6 +31,7 @@ public class Piston extends Subsystem {
 	public void extend() {
 		actuator.set(DoubleSolenoid.Value.kForward);
 		actuator2.set(DoubleSolenoid.Value.kForward);
+		System.out.println("Piston extended");
 		
 	}
 	
@@ -38,6 +39,7 @@ public class Piston extends Subsystem {
 	public void retract() {
 		actuator.set(DoubleSolenoid.Value.kReverse);
 		actuator2.set(DoubleSolenoid.Value.kReverse);
+		System.out.println("Piston retracted");
 		
 	}
 	
@@ -50,6 +52,8 @@ public class Piston extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     	actuator.set(DoubleSolenoid.Value.kOff);
+    	actuator2.set(DoubleSolenoid.Value.kOff);
+    	System.out.println("Piston default command run");
     }
 }
 

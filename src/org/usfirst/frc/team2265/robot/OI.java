@@ -26,9 +26,9 @@ public class OI {
     // number it is.
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
-	Joystick leftJoy = new Joystick(1);
-	Joystick rightJoy = new Joystick(2);
-	Joystick atkJoy = new Joystick(3);
+	Joystick leftJoy = new Joystick(RobotMap.leftJoyPort);
+	Joystick rightJoy = new Joystick(RobotMap.rightJoyPort);
+	Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
 	
 	Button shoot = new JoystickButton(atkJoy, 1); //button a
 	Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
@@ -54,6 +54,7 @@ public class OI {
 			
 			curveLeft.whenPressed(new Curve(false));
 			curveRight.whenPressed(new Curve(true));
+			System.out.println("Buttons bound");
 			
 	}
     

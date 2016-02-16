@@ -29,10 +29,12 @@ public class Cannon extends Subsystem {
         roller = new Talon(RobotMap.rollerPort);
         rollerPos = new CANTalon(RobotMap.rollerPosPort);
         isLow = true;
+        isHigh = false; 
         cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3, RobotMap.cannonSolPort4);
         camTalon = new CANTalon(RobotMap.camTalonPort);
         camTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         rollerPos.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        System.out.println("Cannon created.");
     }
 
     // Put methods for controlling this subsystem
@@ -78,12 +80,14 @@ public class Cannon extends Subsystem {
     	cannonPiston.extend();
     	isHigh = true; 
     	isLow = false; 
+    	System.out.println("Cannon lifted");
     }
     
     public void lowerCannon() {
     	cannonPiston.retract();
     	isLow = true;
     	isHigh = false; 
+    	System.out.println("Cannon lowered");
     }
     
 
