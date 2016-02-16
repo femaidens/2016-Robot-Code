@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,8 +23,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static Cannon cannon; 
-	public static Drivetrain DriveTrain; 
+	public static Cannon cannon;  
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -43,7 +41,6 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         compressy= new Compressor(); 
-        DriveTrain= new Drivetrain();
         compressy.start(); 
         oi.bindButtons(); 
     }
@@ -108,7 +105,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        DriveTrain.drive(); 
     }
     
     /**

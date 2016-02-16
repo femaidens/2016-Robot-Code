@@ -2,45 +2,41 @@ package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class ToggleMode extends Command {
-	boolean shifted;
-    public ToggleMode() {
+public class ToggleCannon extends Command {
+
+    public ToggleCannon() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.DriveTrain); 
+    	
     }
-
+    boolean done;
     // Called just before this Command runs the first time
     protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	
-    	if (Robot.DriveTrain.get().equals(Value.kReverse)|| Robot.DriveTrain.get().equals(Value.kOff)){
-    		Robot.DriveTrain.shiftToSpeed(); 
-    		shifted = true;
-    		return;
-    		
+    	if (Robot.cannon.isHigh){
+    			Robot.cannon.lowerCannon();
+    			done = true;
+    			return;
     	}
-    	
-    	if(Robot.DriveTrain.get().equals(Value.kForward)|| Robot.DriveTrain.get().equals(Value.kOff)){
-    		Robot.DriveTrain.shiftToPower(); 
-    		shifted = true; 
-    		return;
+    	if(Robot.cannon.isLow) {
+    			Robot.cannon.liftCannon();
+    			done = true; 
+    			return;
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return shifted;
+        return done;
     }
 
     // Called once after isFinished returns true

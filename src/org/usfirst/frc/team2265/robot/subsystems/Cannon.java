@@ -13,36 +13,36 @@ import org.usfirst.frc.team2265.robot.subsystems.Piston;
  */
 public class Cannon extends Subsystem {
 
-    public Talon cannonFL, cannonFR, roller;
-    public CANTalon camTalon;
-    public PIDController PIDCannonFL, PIDCannonFR;
-    public Encoder encLeft, encRight;
-    public Piston rollerPiston, cannonPiston;
+    public CANTalon cannonL, cannonR, roller, camTalon, rollerServo;
+    public Piston cannonPiston;
     public boolean isShooting = false; 
-    //test to find number of ticks needed to fully turn the cam
+    
+    //test to find number of ticks needed 
     private int camTicks = 1800;
+    private int shootTicks = 1800;
+    private int acquireTicks = 1800;
+    
+    public boolean isHigh, isLow;
+    
     private double Kp = 0.05, Ki = 0.01, Kd=0.0; 
-    private double Kpwm;
+    private double Kpwm = 1/585;
     //needs the actual pwm constant
+    
     private double leftVError, leftVErrorSum, leftVErrorChange, rightVError, rightVErrorSum, rightVErrorChange, leftOutput, rightOutput; 
+    
     public Cannon() {
-    	encLeft = new Encoder(RobotMap.encLeftPort1, RobotMap.encLeftPort2);
-    	encRight = new Encoder (RobotMap.encRightPort1, RobotMap.encRightPort2);
     	
-        cannonFL = new Talon(RobotMap.cannonFLPort);
-        cannonFR = new Talon(RobotMap.cannonFRPort);
-        
-        PIDCannonFL = new PIDController(0.05, 0.0, 0.0, encLeft, cannonFL);
-        PIDCannonFR = new PIDController(0.05, 0.0, 0.0, encRight, cannonFR);
-        
-        roller = new Talon(RobotMap.rollerPort);
-        rollerPiston = new Piston(RobotMap.rollerSolPort1, RobotMap.rollerSolPort2);
-        cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2);
+        cannonL = new CANTalon(RobotMap.cannonLPort);
+        cannonR = new CANTalon(RobotMap.cannonRPort);
         camTalon = new CANTalon(RobotMap.camTalonPort);
+        roller = new CANTalon(RobotMap.rollerPort);
+        rollerServo = new CANTalon(RobotMap.rollerServoPort);
+        cannonL.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        cannonR.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         camTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         
-        encLeft.setDistancePerPulse(0.002);
-        encRight.setDistancePerPulse(0.002);
+        cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3, RobotMap.cannonSolPort4);
+        
     }
 
     // Put methods for controlling this subsystem
@@ -53,27 +53,26 @@ public class Cannon extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 
-    public void spinWheels(double velocity) {
+    public void spinWheels(double pwm) {
         //positive velocity is to shoot
         //negative velocity is to acquire
     	
-    	PIDCannonFL.setSetpoint(-velocity);
-    	PIDCannonFR.setSetpoint(velocity);
+    	double velocity = pwm * 585;
     	//TO-DO:
     	
-    		leftVErrorChange = leftVError - (velocity - encLeft.getRate()); 
-    		leftVError = velocity - encLeft.getRate();
+    		leftVErrorChange = leftVError - (velocity - cannonL.getEncVelocity()); 
+    		leftVError = velocity - cannonL.getEncVelocity();
     		leftVErrorSum += leftVError;
     		
-    		rightVErrorChange = rightVError - (velocity - encRight.getRate()); 
-    		rightVError = velocity - encRight.getRate();
+    		rightVErrorChange = rightVError - (velocity - cannonR.getEncVelocity()); 
+    		rightVError = velocity - cannonR.getEncVelocity();
     		rightVErrorSum += rightVError;
     		
     		leftOutput += -Kpwm*(Kp*leftVError + Ki*leftVErrorSum + Kd*leftVErrorChange); 
     		rightOutput += Kpwm*(Kp*rightVError + Ki*rightVErrorSum + Kd*rightVErrorChange);
     	
-    		cannonFL.set(leftOutput);
-    		cannonFR.set(rightOutput);
+    		cannonL.set(leftOutput);
+    		cannonR.set(rightOutput);
         //cannonFL.set(-velocity);
         //cannonFR.set(velocity);
         //PIDCannonFL.get();
@@ -84,8 +83,8 @@ public class Cannon extends Subsystem {
     public void spinWheels(double leftVelocity, double rightVelocity) {
         //positive velocity is to shoot
         //negative velocity is to acquire
-        cannonFL.set(leftVelocity);
-        cannonFR.set(-rightVelocity);
+        cannonL.set(leftVelocity);
+        cannonR.set(-rightVelocity);
     }
 
     public void spinRoller(double velocity) {
@@ -93,8 +92,8 @@ public class Cannon extends Subsystem {
     }
 
     public void stop() {
-        cannonFL.set(0.0);
-        cannonFR.set(0.0);
+        cannonL.set(0.0);
+        cannonR.set(0.0);
         roller.set(0.0);
         isShooting = false;
     }
@@ -106,11 +105,13 @@ public class Cannon extends Subsystem {
     }
     
     public void liftRoller() {
-    	rollerPiston.extend();
+    	while (camTalon.getEncPosition() < shootTicks)
+    		rollerServo.set(0.25);
     }
     
     public void lowerRoller() {
-    	rollerPiston.retract();
+    	while (camTalon.getEncPosition() < acquireTicks)
+    		rollerServo.set(-0.25);
     }
     
     public void liftCannon() {

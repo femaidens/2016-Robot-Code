@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.commands.ToggleMode;
+import org.usfirst.frc.team2265.robot.commands.ToggleCannon;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -43,7 +43,7 @@ public class OI {
 	public static Button toggleMode = new JoystickButton(atkJoy, 2);
 	
 	public void bindButtons() {
-		toggleMode.whenPressed(new ToggleMode());
+		toggleMode.whenPressed(new ToggleCannon());
 		
 	}
 }
