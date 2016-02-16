@@ -110,8 +110,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //driveTrain.drive();  
-        SmartDashboard.putNumber("Encoder Testing", driveTrain.frontRight.getEncVelocity());
+        driveTrain.drive();  
+        driveTrain.toString(); 
     }
     
     /**

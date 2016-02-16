@@ -44,13 +44,10 @@ public class OI {
 	public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
 	public static Button toggleMode = new JoystickButton(atkJoy, 2);
 	public static Button collision = new JoystickButton(atkJoy,11);
-	public static Button motorOn= new JoystickButton(atkJoy, 4);
 	
 	public void bindButtons() {
 		toggleMode.whenPressed(new ToggleMode());
 		collision.whenPressed(new Collision());
-		motorOn.whileHeld(new Drive(-1,0.1));
-		motorOn.whenReleased(new Drive(0.0,0.0)); 
 		
 	}
 }

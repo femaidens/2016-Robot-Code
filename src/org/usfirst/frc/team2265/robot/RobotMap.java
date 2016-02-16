@@ -26,10 +26,10 @@ public class RobotMap {
 			public static int gyroPort = 0; //analog
 
 			//Solenoid Ports
-			public static int rollerSolPort1 = 0;
-			public static int rollerSolPort2 = 1; 
 			public static int cannonSolPort1 = 2;
 			public static int cannonSolPort2 = 3;
 			public static int transPort1= 0; 
 			public static int transPort2= 1; 
+			public static int transPort3 = 2; 
+			public static int transPort4 = 3; 
 }
