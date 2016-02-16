@@ -20,29 +20,27 @@ public class Piston extends Subsystem {
 	Talon shootServo;
 	Timer timer = new Timer(); 
 	
-	//public Piston (int port1, int port2, int port3, int port4) {
-	public Piston (int port1, int port2, int port3) {
+	public Piston (int port1, int port2, int port3, int port4) {
+	//public Piston (int port1, int port2, int port3) {
 		actuator = new DoubleSolenoid(port1, port2);
-		shootServo = new Talon(port3);
-		//actuator2 = new DoubleSolenoid(port3, port4);
+		actuator2 = new DoubleSolenoid(port3, port4);
 		
 	}
 	
- 
 	//method to extend the piston
 	public void extend() {
 		actuator.set(DoubleSolenoid.Value.kForward);
+		actuator2.set(DoubleSolenoid.Value.kForward);
+		
 	}
 	
 	//method to retract the piston
 	public void retract() {
 		actuator.set(DoubleSolenoid.Value.kReverse);
+		actuator2.set(DoubleSolenoid.Value.kReverse);
+		
 	}
 	
-	public void lower() {
-		while(timer.get() < 0.2)
-			shootServo.set(0.3);
-	}
 	//method to return the value of the piston
 	public Value get() {
 		return actuator.get();

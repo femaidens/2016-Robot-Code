@@ -1,26 +1,40 @@
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
+import org.usfirst.frc.team2265.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class CurveHigh extends Command {
+public class Curve extends Command {
 
 	double leftVelocity;
 	double rightVelocity;
 	
-    public CurveHigh(boolean direction) {
+    public Curve(boolean direction) {
     	//true for right, false for left
     	if (direction == true) {
-    		leftVelocity = 0.5;
-    		rightVelocity = 0.3;
+    		if (Robot.cannon.isHigh) {
+	    		leftVelocity = 0.7;
+	    		rightVelocity = 0.5;
+    		}
+    		else if (Robot.cannon.isLow){
+    			leftVelocity = 0.5;
+    			rightVelocity = 0.3;
+    		}
     }
     	else if (direction == false) {
-    		leftVelocity = 0.3;
-    		rightVelocity = 0.5;
+    		if (Robot.cannon.isHigh) {
+	    		leftVelocity = 0.5;
+	    		rightVelocity = 0.7;
+    		}
+    		else if (Robot.cannon.isLow){
+    			leftVelocity = 0.3;
+    			rightVelocity = 0.5;
+    		}
     	}
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -34,6 +48,8 @@ public class CurveHigh extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.cannon.spinWheels(leftVelocity, rightVelocity);
+    	Timer.delay(RobotMap.wheelDelay);
+    	Robot.cannon.turnCam();
     }
 
     // Make this return true when this Command no longer needs to run execute()
