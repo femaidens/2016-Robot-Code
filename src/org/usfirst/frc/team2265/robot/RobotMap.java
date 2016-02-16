@@ -38,10 +38,10 @@ public class RobotMap {
 		public static int gyroPort = 0; //analog
 
 		//Solenoid Ports
-		public static int cannonSolPort1 = 0;
-		public static int cannonSolPort2 = 1;
-		public static int cannonSolPort3 = 2;
-		public static int cannonSolPort4 = 3;
+		public static int cannonSolPort1 = 2;
+		public static int cannonSolPort2 = 3;
+		public static int cannonSolPort3 = 4;
+		public static int cannonSolPort4 = 5;
 		//Time it takes for the wheels to reach full speed
 		public static double wheelDelay = 1.25; 
 		
