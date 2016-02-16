@@ -4,6 +4,7 @@ package org.usfirst.frc.team2265.robot;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -117,6 +118,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         ledRing.set(true);
         System.out.println("TELEOP:" + table.toString());
+        Timer.delay(5.0);
     }
 
     /**
@@ -126,8 +128,10 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();  
         
         //double[] width= new double[2]; 
-        double [] defaultVals= new double[1]; 
-        double[] width= table.getNumberArray("width", defaultVals); 
+        double [] defaultVals= new double[1];
+        
+        double[] width= table.getNumberArray("FirstReport/width", defaultVals); 
+        double[] area= table.getNumberArray("FirstReport/area", defaultVals); 
         
         System.out.print( " " + width); 
         SmartDashboard.putNumber("width", width[0]);
