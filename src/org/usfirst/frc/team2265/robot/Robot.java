@@ -120,7 +120,7 @@ public class Robot extends IterativeRobot {
         ledRing.set(true);
         System.out.println("TELEOP:" + table.toString());
         Timer.delay(2.0);
-        cammy.centering(); 
+       // cammy.centering(); 
     }
 
     /**
@@ -128,7 +128,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();  
-        cammy.centering();
+        //cammy.centering();
+        cammy.testDrive();
       // cammy.testDrive();
        /*double defVal= 0.0; 
        double height = table.getNumber("IMAGE_HEIGHT", defVal);

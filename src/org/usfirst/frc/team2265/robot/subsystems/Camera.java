@@ -63,15 +63,19 @@ public class Camera extends Subsystem {
     	SmartDashboard.putNumber("Area: ", largest);*/
     	SmartDashboard.putNumber("Off Center By: ", difference );
     	
-    	if(difference >= -5.0 && difference <= 5.0) { 
+    	/*if(difference >= -5.0 && difference <= 5.0) { 
     		testDrive(0.0, 0.0);  
     		return true;
-    	}
+    	}*/
+    	/*Instead of using an if and running the method multiple times, the method loops until it 
+    	 centers the robot. If statement method is above. */
+    	while (!(difference >= -5.0 && difference <= 5.0)){
     	if(difference <-5.0){
     		testDrive(0.2,0.05);
     	}
     	if(difference > 5.0)
     		testDrive(0.05, 0.2);
+    	}
     	return false;
     }
 	public int shake(){
@@ -90,11 +94,16 @@ public class Camera extends Subsystem {
     }
     
     public void testDrive() {
-    	testDrive.tankDrive(-testLeft.getY(), -testRight.getY());
+    	double left = -testLeft.getY();
+    	double right = -testRight.getY();
+    	left = Math.pow(left,3.0);
+    	right = Math.pow(right, 3.0);
+    	testDrive.tankDrive(left, right);
     }
     
     public void testDrive(double x, double y){
-    	testDrive.tankDrive(x , y);
+    	testDrive.tankDrive(Math.pow(x, 3.0) , Math.pow(y, 3.0));
+ 
     }
 }
 
