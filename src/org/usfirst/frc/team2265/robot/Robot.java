@@ -35,8 +35,8 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     SendableChooser chooser;
 
-    Camera cammy; 
-    private final NetworkTable table= NetworkTable.getTable("GRIP");
+    public static Camera cammy; 
+    private final NetworkTable table= NetworkTable.getTable("RoboRealm");
     public static Solenoid ledRing; 
 
 
@@ -52,6 +52,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Auto mode", chooser); 
         ledRing = new Solenoid(7);
         oi.bindButtons();
+        cammy= new Camera(); 
         /*try {
         	new ProcessBuilder("/home/lvuser").inheritIO().start(); 
         } 
@@ -118,7 +119,8 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         ledRing.set(true);
         System.out.println("TELEOP:" + table.toString());
-        Timer.delay(5.0);
+        Timer.delay(2.0);
+        cammy.centering(); 
     }
 
     /**
@@ -126,17 +128,14 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();  
-        
-        //double[] width= new double[2]; 
-        double [] defaultVals= new double[1];
-        
-        double[] width= table.getNumberArray("FirstReport/width", defaultVals); 
-        double[] area= table.getNumberArray("FirstReport/area", defaultVals); 
-        
-        System.out.print( " " + width); 
-        SmartDashboard.putNumber("width", width[0]);
-        table.containsKey("width"); 
-         
+        cammy.centering();
+      // cammy.testDrive();
+       /*double defVal= 0.0; 
+       double height = table.getNumber("IMAGE_HEIGHT", defVal);
+       double blobs= table.getNumber("BLOB_COUNT", defVal); 
+       table.containsKey("IMAGE_HEIGHT");
+       SmartDashboard.putNumber("Height:", height);
+       SmartDashboard.putNumber("Blob Count:", blobs);*/
     }
     
     /**

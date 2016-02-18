@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.LEDRing;
+import org.usfirst.frc.team2265.robot.commands.SquareUp;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,6 +16,7 @@ public class OI {
 	
 	Joystick atkJoy = new Joystick(2);
 	JoystickButton ledOn = new JoystickButton(atkJoy, 8); 
+	JoystickButton squared= new JoystickButton(atkJoy, 4); 
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
@@ -27,6 +29,7 @@ public class OI {
     // commands the same as any other Button.
     public void bindButtons(){
     	ledOn.whenPressed(new LEDRing());
+    	squared.whileHeld(new SquareUp());
     }
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of
