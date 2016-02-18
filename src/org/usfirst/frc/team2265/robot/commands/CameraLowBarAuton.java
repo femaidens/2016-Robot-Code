@@ -10,6 +10,7 @@ public class CameraLowBarAuton extends CommandGroup {
     
     public  CameraLowBarAuton() {
     	addSequential(new DriveOnlyAuton());
+    	addSequential(new AutonDrive(0.65, 0.2));
     	//addSequential(new SquareUp());
     	//addSequential(new Shoot()); 
     	// Add Commands here:
