@@ -42,7 +42,12 @@ public class Camera extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     	//key is a String--I think it's the name of the table
     }
-    
+    public void printOffCenter(){
+    	double imgWidth= (table.getNumber("IMAGE_WIDTH", defaultVals) / 2); 
+    	double cogX = table.getNumber("COG_X", defaultVals); 
+    	double difference = cogX - imgWidth;
+    	SmartDashboard.putNumber("Off Center By: ", difference );
+    }
     public boolean centering() {
     //	double imgHeight = table.getNumber("IMAGE_HEIGHT", defaultVals) / 2;
     	double imgWidth= (table.getNumber("IMAGE_WIDTH", defaultVals) / 2); 
