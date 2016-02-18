@@ -3,6 +3,7 @@ package org.usfirst.frc.team2265.robot.subsystems;
 import org.usfirst.frc.team2265.robot.RobotMap;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Piston;
 
@@ -16,10 +17,17 @@ public class Cannon extends Subsystem {
     public Piston cannonPiston;
     public boolean isShooting = false;
     //test to find number of ticks needed to fully turn the cam
-    private int camTicks = 1800;
-    private int shootTicks = 1800;
-    private int acquireTicks = 1800;
-    private int gateTicks = 1800;
+   
+   /* 
+    * NO ENCODER ON CAM OR ACQUIRER MANIPULATOR
+    * private int camTicks = 1800;
+    * private int shootTicks = 1800;
+    * private int acquireTicks = 1800;
+    * private int gateTicks = 1800;
+    *
+    */
+    private double shootSecs, acquireSecs, gateSecs, camSecs;
+    private Timer timer; 
     public boolean isHigh, isLow;
     
 
@@ -28,6 +36,11 @@ public class Cannon extends Subsystem {
         cannonFR = new Talon(RobotMap.cannonFRPort);
         roller = new Talon(RobotMap.rollerPort);
         rollerPos = new CANTalon(RobotMap.rollerPosPort);
+        camSecs= 0.75;
+        shootSecs= 1.5;
+        acquireSecs = 1.5;
+        gateSecs = 1.75; 
+        
         isLow = true;
         isHigh = false; 
         cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3, RobotMap.cannonSolPort4);
@@ -71,8 +84,10 @@ public class Cannon extends Subsystem {
     }
     
     public void turnCam() {
-        while (camTalon.getEncPosition() < camTicks) 
-            camTalon.set(0.25);
+    	timer.reset();
+    	timer.start(); 
+        while (timer.get() < camSecs) 
+            camTalon.set(1.0);
         	isShooting = true;
     }
     
@@ -92,19 +107,22 @@ public class Cannon extends Subsystem {
     
 
     public void rollerShootPos() {
-    	while (rollerPos.getEncPosition() < shootTicks) 
-            rollerPos.set(0.25);
+    	timer.reset();
+    	timer.start();
+    	while (timer.get() < shootSecs) { rollerPos.set(-0.25); }
 
     }
     
     public void rollerAcquirePos() {
-    	while (rollerPos.getEncPosition() < acquireTicks) 
-            rollerPos.set(0.25);
+    	timer.reset();
+    	timer.start();
+    	while (timer.get() < acquireSecs) { rollerPos.set(0.25); }
 
     }
     
     public void rollerGatePos() {
-    	while (rollerPos.getEncPosition() < gateTicks) 
-            rollerPos.set(0.25);
+    	timer.reset();
+    	timer.start();
+    	while (timer.get() < gateSecs) { rollerPos.set(-0.25); }
     }
 }
