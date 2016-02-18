@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import org.usfirst.frc.team2265.robot.commands.AutonDrive;
+import org.usfirst.frc.team2265.robot.commands.DriveOnlyAuton;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
@@ -43,6 +46,7 @@ public class Robot extends IterativeRobot {
         driveTrain= new Drivetrain();
         compressy.start(); 
         oi.bindButtons(); 
+        autonomousCommand = new DriveOnlyAuton();
     }
 	
 	/**
@@ -68,7 +72,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+      //  autonomousCommand = (Command) chooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -82,7 +86,7 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**

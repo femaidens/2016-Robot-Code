@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
+import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -14,24 +15,33 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Drivetrain extends Subsystem {
-     
-	public static CANTalon frontLeft= new CANTalon(RobotMap.frontLeftPort); 
-    public static CANTalon frontRight= new CANTalon(RobotMap.frontRightPort); 
-    public static CANTalon rearLeft= new CANTalon(RobotMap.rearLeftPort); 
-    public static CANTalon rearRight= new CANTalon(RobotMap.rearRightPort); 
-    public static Joystick rightJoy= new Joystick(RobotMap.rightJoyPort); 
-    public static Joystick leftJoy= new Joystick(RobotMap.leftJoyPort); 
-    public static DoubleSolenoid gearShifter= new DoubleSolenoid(RobotMap.transPort1, RobotMap.transPort2); 
-	public static Compressor compressy = new Compressor(); 
-    public static RobotDrive TankDrive= new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
-    
+	public static CANTalon frontLeft;
+	public static CANTalon frontRight;
+	public static CANTalon rearLeft;
+	public static CANTalon rearRight;
+	public static Joystick leftJoy, rightJoy;
+	public static DoubleSolenoid gearShifter;
+	public static Compressor compressy;
+	public static RobotDrive tankDrive;
+	public Drivetrain(){ 
+		frontLeft= new CANTalon(RobotMap.frontLeftPort); 
+		frontRight= new CANTalon(RobotMap.frontRightPort); 
+		rearLeft= new CANTalon(RobotMap.rearLeftPort); 
+		rearRight= new CANTalon(RobotMap.rearRightPort); 
+		rightJoy= new Joystick(RobotMap.rightJoyPort); 
+		leftJoy= new Joystick(RobotMap.leftJoyPort); 
+		gearShifter= new DoubleSolenoid(RobotMap.transPort1, RobotMap.transPort2); 
+		compressy = new Compressor(); 
+		tankDrive= new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
+    }
 	public void drive(){
 		double leftVal= -leftJoy.getY();
 		double rightVal= -rightJoy.getY(); 
-		TankDrive.tankDrive(leftVal, rightVal); 
+		tankDrive.tankDrive(leftVal, rightVal); 
 	}
     public void drive (double x, double y){
-    	TankDrive.tankDrive(x, y); 
+    	tankDrive.tankDrive(x, y); 
+    	System.out.println("Driving");
     }
     public void shiftToSpeed(){
     	gearShifter.set(DoubleSolenoid.Value.kForward); 

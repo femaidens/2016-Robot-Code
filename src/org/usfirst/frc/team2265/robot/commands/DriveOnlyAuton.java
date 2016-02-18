@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2265.robot.commands;
 
+import org.usfirst.frc.team2265.robot.Robot;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -9,16 +11,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveOnlyAuton extends CommandGroup {
     
     public  DriveOnlyAuton() {
-    	Timer timer = new Timer();
-    	timer.reset();
-    	timer.start();
-    	while (timer.get() < 0.5) {
-    		new AutonDrive (0.8,0.8);
-    	}
+    //	requires(Robot.driveTrain);
+    	//Timer timer = new Timer();
+    	//timer.reset();
+    	//timer.start();
+    //	while (timer.get() < 0.5) {
+    		addSequential(new AutonDrive (0.5,0.5,3.0));
+    //	}
     	//addSequential(new Drive(0.5, 0.5));
-    	Timer.delay(3.0);
        // addSequential(new Drive(0.0,0.0));
-    	timer.stop();
+    	//timer.stop();
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
