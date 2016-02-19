@@ -13,6 +13,7 @@ import org.usfirst.frc.team2265.robot.commands.ToggleMode;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+import org.usfirst.frc.team2265.robot.subsystems.*;
 public class OI {
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
@@ -43,7 +44,7 @@ public class OI {
 	
 	public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
 	public static Button toggleMode = new JoystickButton(atkJoy, 2);
-	public static Button collision = new JoystickButton(atkJoy,11);
+	public static Button collision = new JoystickButton(atkJoy,8);
 	
 	public void bindButtons() {
 		toggleMode.whenPressed(new ToggleMode());

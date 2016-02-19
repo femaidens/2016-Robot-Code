@@ -13,23 +13,27 @@ public class RobotMap {
 			public static int atkJoyPort = 2;
 				
 			//Talon Ports
-			public static int cannonFLPort = 0;
-			public static int cannonFRPort = 99;
-			public static int rollerPort = 99; 
-			public static int camTalonPort = 99;
-			public static int rearLeftPort = 2;
-			public static int rearRightPort = 13;
-			public static int frontLeftPort = 1;
-			public static int frontRightPort = 13;
+			public static int cannonFLPort = 5;
+			public static int cannonFRPort = 6;
+			public static int rollerPort = 4; 
+			public static int acquirer = 1;
+			public static int camTalonPort = 11;
 			
-			//Sensor Ports
-			public static int gyroPort = 0; //analog
-
+			public static int rearLeftPort = 7;
+			public static int frontLeftPort = 8;
+			
+			public static int rearRightPort = 9;
+			public static int frontRightPort = 10;
+			
 			//Solenoid Ports
 			public static int cannonSolPort1 = 2;
 			public static int cannonSolPort2 = 3;
+			public static int cannonSolPort3 = 6;
+			public static int cannonSolPort4 = 7; 
+			
+			//add other sol ports
 			public static int transPort1= 0; 
 			public static int transPort2= 1; 
-			public static int transPort3 = 2; 
-			public static int transPort4 = 3; 
+			public static int transPort3 = 4; 
+			public static int transPort4 = 5; 
 }
