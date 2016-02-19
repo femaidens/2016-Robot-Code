@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", new ExampleCommand());
         SmartDashboard.putData("Auto mode", chooser);
         oi.bindButtons();
+        cannon.stop();
     }
 	
 	/**

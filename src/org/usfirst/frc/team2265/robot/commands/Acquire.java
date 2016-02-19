@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Acquire extends Command {
 
-	double velocity = 0.5;
+	double velocity = 0.35;
 	
     public Acquire() {
         // Use requires() here to declare subsystem dependencies
@@ -19,6 +19,7 @@ public class Acquire extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.cannon.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run

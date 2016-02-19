@@ -34,8 +34,8 @@ public class OI {
 	Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
 	Button rollerToShoot = new JoystickButton(rightJoy, 1);//right trigger
-	Button rollerToAcq = new JoystickButton(rightJoy, 2);//thumb button
-	Button rollerToGate = new JoystickButton(leftJoy, 1); //left trigger	
+	Button rollerToAcq = new JoystickButton(leftJoy, 1);//lfet trigger
+	Button rollerToGate = new JoystickButton(rightJoy, 2); //right thumb	
 	
 	Button curveLeft = new JoystickButton(atkJoy, 5);
 	Button curveRight = new JoystickButton(atkJoy,6);

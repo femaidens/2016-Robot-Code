@@ -30,13 +30,13 @@ public class Cannon extends Subsystem {
         cannonFL = new CANTalon(RobotMap.cannonFLPort);
         cannonFR = new CANTalon(RobotMap.cannonFRPort);
         roller = new CANTalon(RobotMap.rollerPort);
-        rollerPos = new CANTalon(RobotMap.rollerPosPort);
+        rollerPos = new CANTalon(RobotMap.acquirer);
         camTalon = new CANTalon(RobotMap.camTalonPort);
         
-        camSecs = 0.75;
-        shootTicks = 1800;
+        camSecs = 3.0;
+        shootTicks = 1500;
         acquireTicks = 1800;
-        gateTicks = 1800; 
+        gateTicks = 2100; 
         
         isAcq=true;
         isLow = true;
@@ -73,7 +73,7 @@ public class Cannon extends Subsystem {
     }
 
     public void spinRoller(double velocity) {
-        roller.set(velocity);
+        roller.set(-velocity);
     }
 
     public void stop() {
@@ -88,7 +88,7 @@ public class Cannon extends Subsystem {
     	timer.start(); 
         while (timer.get() < camSecs) 
             camTalon.set(1.0);
-        isShooting = true;
+        isShooting = true; //!!!1 NULL POINTER EXCEPTION!!?!?!??!?!?!?
     }
     
     public void liftCannon() {
@@ -106,33 +106,32 @@ public class Cannon extends Subsystem {
     }
 
     public void rollerShootPos() {
+    	rollerPos.reset();
     	if (isAcq)
-    		while (roller.getEncPosition() < shootTicks) { rollerPos.set(RobotMap.up); }
+    		while (rollerPos.getEncPosition() < shootTicks) { rollerPos.set(RobotMap.up); }
     	if(isGate)
-    		while (roller.getEncPosition() < gateTicks- shootTicks) { rollerPos.set(RobotMap.down); }
+    		while (rollerPos.getEncPosition() < gateTicks- shootTicks) { rollerPos.set(RobotMap.down); }
     	isShoot = true;
     	isAcq= false;
     	isGate = false;
     }
     
     public void rollerAcquirePos() {
-    	timer.reset();
-    	timer.start();
+    	rollerPos.reset();
     	if (isShoot)
-    		while (roller.getEncPosition() < acquireTicks) { rollerPos.set(RobotMap.down); }
+    		while (rollerPos.getEncPosition() < acquireTicks) { rollerPos.set(RobotMap.down); }
     	if(isGate)
-    		while (roller.getEncPosition() < gateTicks) { rollerPos.set(RobotMap.down); }
+    		while (rollerPos.getEncPosition() < gateTicks) { rollerPos.set(RobotMap.down); }
     	isShoot = false;
     	isAcq = true;
     	isGate = false;
     }
     
     public void rollerGatePos() {
-    	timer.reset();
-    	timer.start();
+    	rollerPos.reset();
     	if(isShoot)
-    		while (roller.getEncPosition() < gateTicks-shootTicks) { rollerPos.set(RobotMap.up); }
+    		while (rollerPos.getEncPosition() < gateTicks-shootTicks) { rollerPos.set(RobotMap.up); }
     	if(isAcq)
-    		while (roller.getEncPosition() < gateTicks) { rollerPos.set(RobotMap.up); }
+    		while (rollerPos.getEncPosition() < gateTicks) { rollerPos.set(RobotMap.up); }
     }
 }
