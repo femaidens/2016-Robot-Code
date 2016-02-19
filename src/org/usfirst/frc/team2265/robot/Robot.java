@@ -36,9 +36,7 @@ public class Robot extends IterativeRobot {
 		cannon = new Cannon(); 
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-        //cannon.cannonPiston.lower(); 
         oi.bindButtons();
     }
 	
@@ -66,11 +64,12 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
         autonomousCommand = (Command) chooser.getSelected();
-        cannon.cannonPiston.extend();
+        //make robot jerk to 
+        cannon.lowerCannon();
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
+			autonomousCommand = new MyAutoComm	````````````							`	1`2	and();
 			break;
 		case "Default Auto":
 		default:

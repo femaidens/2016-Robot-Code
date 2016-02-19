@@ -2,7 +2,6 @@ package org.usfirst.frc.team2265.robot.subsystems;
 
 import org.usfirst.frc.team2265.robot.RobotMap;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Piston;
@@ -12,41 +11,42 @@ import org.usfirst.frc.team2265.robot.subsystems.Piston;
  */
 public class Cannon extends Subsystem {
 
-    public Talon cannonFL, cannonFR, roller;
-    public CANTalon camTalon, rollerPos;
+    public CANTalon cannonFL, cannonFR, roller, camTalon, rollerPos;
     public Piston cannonPiston;
     public boolean isShooting = false;
-    //test to find number of ticks needed to fully turn the cam
-   
-   /* 
-    * NO ENCODER ON CAM OR ACQUIRER MANIPULATOR
-    * private int camTicks = 1800;
-    * private int shootTicks = 1800;
-    * private int acquireTicks = 1800;
-    * private int gateTicks = 1800;
-    *
-    */
-    private double shootSecs, acquireSecs, gateSecs, camSecs;
-    private Timer timer; 
-    public boolean isHigh, isLow;
+
+    private double shootTicks, acquireTicks, gateTicks, camSecs;
+    /*
+     * shootTicks: ticks to go from acquire to shoot
+     * gateTicks; ticks to go from acquire to gate
+     * acqTicks: ticks it takes to go from shoot to acquire (=shootSecs)
+     * camSecs: time it takes to turn the cam once
+     * */
     
+    private Timer timer; 
+    public boolean isHigh, isLow, isShoot, isAcq, isGate;
 
     public Cannon() {
-        cannonFL = new Talon(RobotMap.cannonFLPort);
-        cannonFR = new Talon(RobotMap.cannonFRPort);
-        roller = new Talon(RobotMap.rollerPort);
+        cannonFL = new CANTalon(RobotMap.cannonFLPort);
+        cannonFR = new CANTalon(RobotMap.cannonFRPort);
+        roller = new CANTalon(RobotMap.rollerPort);
         rollerPos = new CANTalon(RobotMap.rollerPosPort);
-        camSecs= 0.75;
-        shootSecs= 1.5;
-        acquireSecs = 1.5;
-        gateSecs = 1.75; 
+        camTalon = new CANTalon(RobotMap.camTalonPort);
         
+        camSecs = 0.75;
+        shootTicks = 1800;
+        acquireTicks = 1800;
+        gateTicks = 1800; 
+        
+        isAcq=true;
         isLow = true;
         isHigh = false; 
+        
         cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3, RobotMap.cannonSolPort4);
-        camTalon = new CANTalon(RobotMap.camTalonPort);
+        
         camTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         rollerPos.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        
         System.out.println("Cannon created.");
     }
 
@@ -88,7 +88,7 @@ public class Cannon extends Subsystem {
     	timer.start(); 
         while (timer.get() < camSecs) 
             camTalon.set(1.0);
-        	isShooting = true;
+        isShooting = true;
     }
     
     public void liftCannon() {
@@ -104,25 +104,35 @@ public class Cannon extends Subsystem {
     	isHigh = false; 
     	System.out.println("Cannon lowered");
     }
-    
 
     public void rollerShootPos() {
-    	timer.reset();
-    	timer.start();
-    	while (timer.get() < shootSecs) { rollerPos.set(-0.25); }
-
+    	if (isAcq)
+    		while (roller.getEncPosition() < shootTicks) { rollerPos.set(RobotMap.up); }
+    	if(isGate)
+    		while (roller.getEncPosition() < gateTicks- shootTicks) { rollerPos.set(RobotMap.down); }
+    	isShoot = true;
+    	isAcq= false;
+    	isGate = false;
     }
     
     public void rollerAcquirePos() {
     	timer.reset();
     	timer.start();
-    	while (timer.get() < acquireSecs) { rollerPos.set(0.25); }
-
+    	if (isShoot)
+    		while (roller.getEncPosition() < acquireTicks) { rollerPos.set(RobotMap.down); }
+    	if(isGate)
+    		while (roller.getEncPosition() < gateTicks) { rollerPos.set(RobotMap.down); }
+    	isShoot = false;
+    	isAcq = true;
+    	isGate = false;
     }
     
     public void rollerGatePos() {
     	timer.reset();
     	timer.start();
-    	while (timer.get() < gateSecs) { rollerPos.set(-0.25); }
+    	if(isShoot)
+    		while (roller.getEncPosition() < gateTicks-shootTicks) { rollerPos.set(RobotMap.up); }
+    	if(isAcq)
+    		while (roller.getEncPosition() < gateTicks) { rollerPos.set(RobotMap.up); }
     }
 }

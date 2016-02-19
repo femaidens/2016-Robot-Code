@@ -17,6 +17,7 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 	
 	//REAL PORTS TBD 
+	
 		//Joystick Ports
 		public static int leftJoyPort = 0;
 		public static int rightJoyPort = 1;
@@ -32,17 +33,17 @@ public class RobotMap {
 		public static int rearRightPort = 6;
 		public static int frontLeftPort = 7;
 		public static int frontRightPort = 8;
-//		public static int rollerPosPort = 99; 
 		
-		//Sensor Ports\
-		public static int gyroPort = 0; //analog
-
 		//Solenoid Ports
-		public static int cannonSolPort1 = 2;
+		public static int cannonSolPort1 = 2;	
 		public static int cannonSolPort2 = 3;
 		public static int cannonSolPort3 = 4;
 		public static int cannonSolPort4 = 5;
+		
+		//Other
 		//Time it takes for the wheels to reach full speed
 		public static double wheelDelay = 1.25; 
 		
+		public static double up = -0.25;
+		public static double down = 0.25;	
 }
