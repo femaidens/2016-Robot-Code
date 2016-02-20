@@ -13,6 +13,7 @@ public class Curve extends Command {
 
 	double leftVelocity;
 	double rightVelocity;
+	boolean done;
 	
     public Curve(boolean direction) {
     	//true for right, false for left
@@ -50,11 +51,14 @@ public class Curve extends Command {
     	Robot.cannon.spinWheels(leftVelocity, rightVelocity);
     	Timer.delay(RobotMap.wheelDelay);
     	Robot.cannon.turnCam();
+    	Timer.delay(2.5);
+    	Robot.cannon.stop();
+    	done = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return done;
     }
 
     // Called once after isFinished returns true

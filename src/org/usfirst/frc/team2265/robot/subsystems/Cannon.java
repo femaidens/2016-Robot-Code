@@ -83,11 +83,11 @@ public class Cannon extends Subsystem {
         isShooting = false;
     }
     
-    public void turnCam() {
-    	timer.reset();
-    	timer.start(); 
-        while (timer.get() < camSecs) 
-            camTalon.set(1.0);
+    public void turnCam() { 
+        //while (timer.get() < camSecs) 
+        camTalon.set(.75);
+        Timer.delay(2);
+        camTalon.set(0.0); 
         isShooting = true; //!!!1 NULL POINTER EXCEPTION!!?!?!??!?!?!?
     }
     
