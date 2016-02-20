@@ -27,11 +27,11 @@ public class Shoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.cannon.isHigh)
+    	/*if (Robot.cannon.isHigh)
     		Robot.cannon.spinWheels(v*1.25);
     	if (Robot.cannon.isLow)
     		Robot.cannon.spinWheels(v*0.75);
-    	Timer.delay(RobotMap.wheelDelay);
+    	Timer.delay(RobotMap.wheelDelay); */
     	Robot.cannon.turnCam();
     	done = true;
     }
