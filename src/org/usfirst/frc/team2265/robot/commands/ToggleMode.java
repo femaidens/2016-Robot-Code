@@ -4,6 +4,7 @@ import org.usfirst.frc.team2265.robot.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -24,7 +25,8 @@ public class ToggleMode extends Command {
     protected void execute() {
     	
     	if (Robot.driveTrain.get().equals(Value.kForward)|| Robot.driveTrain.get().equals(Value.kOff)){
-    		Robot.driveTrain.shiftToSpeed(); 
+    		Robot.driveTrain.shiftToSpeed();
+    		SmartDashboard.putString("Mode: ", "Speed Mode");
     		shifted = true;
     		return;
     		
@@ -32,6 +34,7 @@ public class ToggleMode extends Command {
     	
     	if(Robot.driveTrain.get().equals(Value.kReverse)|| Robot.driveTrain.get().equals(Value.kOff)){
     		Robot.driveTrain.shiftToPower(); 
+    		SmartDashboard.putString("Mode: ", "Power Mode");
     		shifted = true; 
     		return;
     	}
