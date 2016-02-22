@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RollerToAcq extends Command {
 
+	boolean done; 
+	
     public RollerToAcq() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -18,16 +20,19 @@ public class RollerToAcq extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.cannon.rollerAcquirePos();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.cannon.rollerAcquirePos();
+    	Robot.cannon.rollerAcquirePos();
+    	done= true; 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return done;
     }
 
     // Called once after isFinished returns true
