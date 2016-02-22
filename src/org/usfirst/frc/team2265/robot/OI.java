@@ -8,6 +8,14 @@ import org.usfirst.frc.team2265.robot.commands.Collision;
 import org.usfirst.frc.team2265.robot.commands.Drive;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.ToggleMode;
+import org.usfirst.frc.team2265.robot.commands.Acquire;
+import org.usfirst.frc.team2265.robot.commands.Curve;
+//import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.commands.RollerToAcq;
+import org.usfirst.frc.team2265.robot.commands.RollerToShoot;
+import org.usfirst.frc.team2265.robot.commands.Shoot;
+import org.usfirst.frc.team2265.robot.commands.StopCannon;
+import org.usfirst.frc.team2265.robot.commands.ToggleCannon;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -43,12 +51,35 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
+	public static Joystick rightJoy= new Joystick(RobotMap.rightJoyPort); 
+	public static Joystick leftJoy = new Joystick(RobotMap.leftJoyPort);
+	
 	public static Button toggleMode = new JoystickButton(atkJoy, 2);
 	public static Button collision = new JoystickButton(atkJoy,8);
+	Button shoot = new JoystickButton(atkJoy, 1); //button a
+	Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
+	Button acquire = new JoystickButton(atkJoy, 2); //button b
+	Button rollerToShoot = new JoystickButton(rightJoy, 1);//right trigger
+	Button rollerToAcq = new JoystickButton(leftJoy, 1);//lfet trigger
+	Button rollerToGate = new JoystickButton(rightJoy, 2); //right thumb	
+	
+	Button curveLeft = new JoystickButton(atkJoy, 5);
+	Button curveRight = new JoystickButton(atkJoy,6);
 	
 	public void bindButtons() {
 		toggleMode.whenPressed(new ToggleMode());
 		collision.whenPressed(new Collision());
+		shoot.whenPressed(new Shoot(0.4));
+		shoot.whenReleased(new StopCannon());
+		toggleCannonPos.whenPressed(new ToggleCannon());
+		acquire.whileHeld(new Acquire());
+		acquire.whenReleased(new StopCannon());
+		rollerToShoot.whenPressed(new RollerToShoot());
+		rollerToAcq.whenPressed(new RollerToAcq());
+		
+		curveLeft.whenPressed(new Curve(false));
+		curveRight.whenPressed(new Curve(true));
+		System.out.println("Buttons bound");
 		
 	}
 }

@@ -12,19 +12,6 @@ public class RobotMap {
 			public static int leftJoyPort = 0;
 			public static int rightJoyPort = 1;
 			public static int atkJoyPort = 2;
-				
-			//Talon Ports
-			public static int cannonFLPort = 5;
-			public static int cannonFRPort = 6;
-			public static int rollerPort = 4; 
-			public static int acquirer = 1;
-			public static int camTalonPort = 11;
-			
-			public static int rearLeftPort = 7;
-			public static int frontLeftPort = 8;
-			
-			public static int rearRightPort = 9;
-			public static int frontRightPort = 10;
 			
 			//Solenoid Ports
 			public static int cannonSolPort1 = 2;
@@ -37,4 +24,25 @@ public class RobotMap {
 			public static int transPort2= 1; 
 			public static int transPort3 = 4; 
 			public static int transPort4 = 5; 
+			
+			//Talon Ports
+			public static int cannonFLPort = 5;
+			public static int cannonFRPort = 6;
+			public static int rollerPort = 4; 
+			public static int acquirer = 1;
+			public static int camTalonPort = 11;
+			
+			public static int rearLeftPort = 7;
+			public static int frontLeftPort = 8;
+			
+			public static int rearRightPort = 9;
+			public static int frontRightPort = 10;
+	
+				
+				//Other
+				//Time it takes for the wheels to reach full speed
+				public static double wheelDelay = 1.25; 
+				
+				public static double up = -0.25;
+				public static double down = 0.25;	
 }
