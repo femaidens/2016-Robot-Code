@@ -26,7 +26,7 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		Robot.driveTrain.frontRight.set(x); 
+    		Robot.driveTrain.drive(x,y); 
     		//Timer.delay(0.1);
     }
 

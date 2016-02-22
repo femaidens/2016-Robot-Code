@@ -25,6 +25,10 @@ public class Cannon extends Subsystem {
     
     private Timer timer; 
     public boolean isHigh, isLow, isShoot, isAcq, isGate;
+    private double Kp = 0.05, Ki = 0.01, Kd=0.0; 
+    private double Kpwm = 1/585;
+    
+    private double leftVError, leftVErrorSum, leftVErrorChange, rightVError, rightVErrorSum, rightVErrorChange, leftOutput, rightOutput; 
 
     public Cannon() {
         cannonFL = new CANTalon(RobotMap.cannonFLPort);
@@ -33,12 +37,12 @@ public class Cannon extends Subsystem {
         rollerPos = new CANTalon(RobotMap.acquirer);
         camTalon = new CANTalon(RobotMap.camTalonPort);
         
-        camSecs = 3.0;
+        camSecs = .75;
         shootTicks = 1500;
         acquireTicks = 1800;
         gateTicks = 2100; 
         
-        isAcq=true;
+        isAcq= true;
         isLow = true;
         isHigh = false; 
         
@@ -85,10 +89,10 @@ public class Cannon extends Subsystem {
     
     public void turnCam() { 
         //while (timer.get() < camSecs) 
-        camTalon.set(.75);
-        Timer.delay(2);
+        camTalon.set(.878);
+        Timer.delay(camSecs);
         camTalon.set(0.0); 
-        isShooting = true; //!!!1 NULL POINTER EXCEPTION!!?!?!??!?!?!?
+        isShooting = true; 
     }
     
     public void liftCannon() {
@@ -115,7 +119,8 @@ public class Cannon extends Subsystem {
     	isAcq= false;
     	isGate = false; */
     	rollerPos.set(RobotMap.up); 
-    	Timer.delay(1.5);
+    	Timer.delay(0.8);
+    	rollerPos.set(0.0);
     }
     
     public void rollerAcquirePos() {
@@ -128,18 +133,9 @@ public class Cannon extends Subsystem {
     	isAcq = true;
     	isGate = false; */
     	rollerPos.set(RobotMap.down);
-    	Timer.delay(1.5);
+    	Timer.delay(0.8);
+    	rollerPos.set(0.0);
     }
     
-    public void rollerGatePos() {
-    	/*rollerPos.reset();
-    	if(isShoot)
-    		while (rollerPos.getEncPosition() < gateTicks-shootTicks) { rollerPos.set(RobotMap.up); }
-    	if(isAcq)
-    		while (rollerPos.getEncPosition() < gateTicks) { rollerPos.set(RobotMap.up); } */
-    	rollerPos.set(RobotMap.up); 
-    	Timer.delay(1.5);
-    	rollerPos.set(0.0);
-    		
-    }
+ 
 }

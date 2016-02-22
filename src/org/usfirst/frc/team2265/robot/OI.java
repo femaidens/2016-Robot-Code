@@ -54,14 +54,13 @@ public class OI {
 	public static Joystick rightJoy= new Joystick(RobotMap.rightJoyPort); 
 	public static Joystick leftJoy = new Joystick(RobotMap.leftJoyPort);
 	
-	public static Button toggleMode = new JoystickButton(atkJoy, 2);
+	public static Button toggleMode = new JoystickButton(rightJoy, 3);
 	public static Button collision = new JoystickButton(atkJoy,8);
 	Button shoot = new JoystickButton(atkJoy, 1); //button a
 	Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
 	Button rollerToShoot = new JoystickButton(rightJoy, 1);//right trigger
 	Button rollerToAcq = new JoystickButton(leftJoy, 1);//lfet trigger
-	Button rollerToGate = new JoystickButton(rightJoy, 2); //right thumb	
 	
 	Button curveLeft = new JoystickButton(atkJoy, 5);
 	Button curveRight = new JoystickButton(atkJoy,6);

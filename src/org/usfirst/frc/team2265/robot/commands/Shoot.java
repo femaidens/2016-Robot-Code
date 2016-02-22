@@ -33,6 +33,7 @@ public class Shoot extends Command {
     		Robot.cannon.spinWheels(v*0.75);
     	Timer.delay(RobotMap.wheelDelay); */
     	Robot.cannon.turnCam();
+    	Timer.delay(0.75);
     	done = true;
     }
 
