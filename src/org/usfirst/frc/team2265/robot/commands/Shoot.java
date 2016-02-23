@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Shoot extends Command {
-	double v = 1.0;
+	double v;
 	boolean done;
     public Shoot(double velocity) {
         // Use requires() here to declare subsystem dependencies
@@ -33,7 +33,7 @@ public class Shoot extends Command {
     	if (Robot.cannon.isLow)
     		Robot.cannon.spinWheels(v*0.75);
     	Timer.delay(RobotMap.wheelDelay); 
-    	Robot.cannon.turnCam();
+    	//Robot.cannon.turnCam();
     	Timer.delay(1.5);
     	done = true;
     }
@@ -45,7 +45,7 @@ public class Shoot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cannon.stop();
+    	
     	Robot.compressy.start();
     }
 

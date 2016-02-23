@@ -62,7 +62,7 @@ public class OI {
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
 	Button rollerToShoot = new JoystickButton(rightJoy, 1);//right trigger
 	Button rollerToAcq = new JoystickButton(leftJoy, 1);//lfet trigger
-	Button reverseCam = new JoystickButton(leftJoy, 2); // left thumb button. 
+	Button reverseCam = new JoystickButton(atkJoy, 3); // left thumb button. 
 	
 	Button curveLeft = new JoystickButton(atkJoy, 5);
 	Button curveRight = new JoystickButton(atkJoy,6);
@@ -70,7 +70,7 @@ public class OI {
 	public void bindButtons() {
 		toggleMode.whenPressed(new ToggleMode());
 		collision.whenPressed(new Collision());
-		shoot.whenPressed(new Shoot(0.4));
+		shoot.whenPressed(new Shoot(1.0));
 		shoot.whenReleased(new StopCannon());
 		toggleCannonPos.whenPressed(new ToggleCannon());
 		acquire.whileHeld(new Acquire());
