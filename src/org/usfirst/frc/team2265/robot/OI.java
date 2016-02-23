@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team2265.robot.commands.Collision;
 import org.usfirst.frc.team2265.robot.commands.Drive;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.commands.ReverseCam;
 import org.usfirst.frc.team2265.robot.commands.ToggleMode;
 import org.usfirst.frc.team2265.robot.commands.Acquire;
 import org.usfirst.frc.team2265.robot.commands.Curve;
@@ -61,6 +62,7 @@ public class OI {
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
 	Button rollerToShoot = new JoystickButton(rightJoy, 1);//right trigger
 	Button rollerToAcq = new JoystickButton(leftJoy, 1);//lfet trigger
+	Button reverseCam = new JoystickButton(leftJoy, 2); // left thumb button. 
 	
 	Button curveLeft = new JoystickButton(atkJoy, 5);
 	Button curveRight = new JoystickButton(atkJoy,6);
@@ -75,6 +77,8 @@ public class OI {
 		acquire.whenReleased(new StopCannon());
 		rollerToShoot.whenPressed(new RollerToShoot());
 		rollerToAcq.whenPressed(new RollerToAcq());
+		reverseCam.whileHeld(new ReverseCam()); 
+		reverseCam.whenReleased(new StopCannon());
 		
 		curveLeft.whenPressed(new Curve(false));
 		curveRight.whenPressed(new Curve(true));

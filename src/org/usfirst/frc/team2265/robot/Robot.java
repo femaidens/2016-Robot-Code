@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
 	public static Cannon cannon;
     Command autonomousCommand;
     SendableChooser chooser;
-    Compressor compressy; 
+    public static Compressor compressy; 
 
     /**
      * This function is run when the robot is first started up and should be
