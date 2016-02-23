@@ -32,9 +32,6 @@ public class Shoot extends Command {
     		Robot.cannon.spinWheels(v*1);
     	if (Robot.cannon.isLow)
     		Robot.cannon.spinWheels(v*0.75);
-    	Timer.delay(RobotMap.wheelDelay); 
-    	//Robot.cannon.turnCam();
-    	Timer.delay(1.5);
     	done = true;
     }
 
