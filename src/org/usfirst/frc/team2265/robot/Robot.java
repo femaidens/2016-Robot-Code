@@ -1,17 +1,24 @@
 
 package org.usfirst.frc.team2265.robot;
-
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2265.robot.commands.AutonDrive;
 import org.usfirst.frc.team2265.robot.commands.DriveOnlyAuton;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+
+import java.io.IOException;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team2265.robot.subsystems.Camera;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -32,6 +39,11 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser;
     Compressor compressy; 
 
+    public static Camera cammy; 
+    private final NetworkTable table= NetworkTable.getTable("RoboRealm");
+    public static Solenoid ledRing; 
+
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -40,13 +52,17 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
+//      chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         compressy= new Compressor(); 
         driveTrain= new Drivetrain();
         compressy.start(); 
         oi.bindButtons(); 
         autonomousCommand = new DriveOnlyAuton();
+        SmartDashboard.putData("Auto mode", chooser); 
+        ledRing = new Solenoid(7);
+        oi.bindButtons();
+        cammy= new Camera(); 
     }
 	
 	/**
@@ -72,7 +88,10 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-      //  autonomousCommand = (Command) chooser.getSelected();
+        autonomousCommand = (Command) chooser.getSelected();
+        ledRing.set(true);
+
+        System.out.println("AUTON" + table.toString());
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -102,14 +121,26 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        ledRing.set(true);
+        System.out.println("TELEOP:" + table.toString());
+        Timer.delay(2.0);
+       // cammy.centering(); 
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-        driveTrain.drive(); 
+        Scheduler.getInstance().run();  
+        //cammy.centering();
+        cammy.testDrive();
+      // cammy.testDrive();
+       /*double defVal= 0.0; 
+       double height = table.getNumber("IMAGE_HEIGHT", defVal);
+       double blobs= table.getNumber("BLOB_COUNT", defVal); 
+       table.containsKey("IMAGE_HEIGHT");
+       SmartDashboard.putNumber("Height:", height);
+       SmartDashboard.putNumber("Blob Count:", blobs);*/
     }
     
     /**

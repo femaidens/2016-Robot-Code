@@ -4,14 +4,20 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.ToggleMode;
+import org.usfirst.frc.team2265.robot.commands.LEDRing;
+import org.usfirst.frc.team2265.robot.commands.SquareUp;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	
+	Joystick atkJoy = new Joystick(2);
+	JoystickButton ledOn = new JoystickButton(atkJoy, 8); 
+	JoystickButton squared= new JoystickButton(atkJoy, 4); 
+	Button toggleMode = new JoystickButton(atkJoy, 2);
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
@@ -22,7 +28,11 @@ public class OI {
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
-    
+    public void bindButtons(){
+    	ledOn.whenPressed(new LEDRing());
+    	squared.whileHeld(new SquareUp());
+    	toggleMode.whenPressed(new ToggleMode());
+    }
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of
     // three ways:
@@ -38,13 +48,7 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+
 	
-	public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
-	public static Button toggleMode = new JoystickButton(atkJoy, 2);
-	
-	public void bindButtons() {
-		toggleMode.whenPressed(new ToggleMode());
-		
-	}
 }
 
