@@ -89,14 +89,14 @@ public class Cannon extends Subsystem {
     
     public void turnCam() { 
         //while (timer.get() < camSecs) 
-        camTalon.set(-.878);
+        camTalon.set(.878);
         Timer.delay(camSecs);
         camTalon.set(0.0); 
         isShooting = true; 
     }
     
     public void reverseCam() {
-    	camTalon.set(.83); 
+    	camTalon.set(-.83); 
     	Timer.delay(camSecs);
     	camTalon.set(0.0);
     	isShooting= false; 

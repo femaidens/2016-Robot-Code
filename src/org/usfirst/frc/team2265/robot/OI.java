@@ -72,14 +72,14 @@ public class OI {
 	public void bindButtons() {
 		toggleMode.whenPressed(new ToggleMode());
 		collision.whenPressed(new Collision());
-		shoot.whenPressed(new Shoot(1.0));
+		shoot.whileHeld(new Shoot(1.0));
 		shoot.whenReleased(new StopCannon());
 		toggleCannonPos.whenPressed(new ToggleCannon());
 		acquire.whileHeld(new Acquire());
 		acquire.whenReleased(new StopCannon());
 		rollerToShoot.whenPressed(new RollerToShoot());
 		rollerToAcq.whenPressed(new RollerToAcq());
-		turnCam.whileHeld(new TurnCam()); 
+		turnCam.whenPressed(new TurnCam()); 
 		turnCam.whenReleased(new StopCannon());
 		reverseCam.whileHeld(new ReverseCam()); 
 		reverseCam.whenReleased(new StopCannon());
