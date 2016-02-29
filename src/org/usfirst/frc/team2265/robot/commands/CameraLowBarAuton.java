@@ -10,7 +10,9 @@ public class CameraLowBarAuton extends CommandGroup {
     
     public  CameraLowBarAuton() {
     	addSequential(new DriveOnlyAuton());
-    	addSequential(new AutonDrive(0.65, 0.2, 0.3));
+    	addSequential(new AutonDrive(0.5, 0.2, 3.0));
+    	
+    	// Distance to move: 13 feet from autoLine to alignment line (if back of robot is on autoLine. 
     	//addSequential(new SquareUp());
     	//addSequential(new Shoot()); 
     	// Add Commands here:

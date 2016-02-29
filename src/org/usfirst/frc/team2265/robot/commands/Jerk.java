@@ -8,28 +8,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutonDrive extends Command {
+public class Jerk extends Command {
 
-    double x, y, time, timePassed; 
     Timer timer; 
-	public AutonDrive(double xDir, double yDir, double seconds) {
-        //requires(Robot.driveTrain); 
-        x= xDir; 
-        y= yDir;
-        time= seconds;  
+    double time, timePassed;
+    
+	public Jerk() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+		timer = new Timer();
+		time = 0.5; 
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	timer = new Timer(); 
-    	timer.start(); 
+    	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	    timePassed= timer.get();
-    		System.out.println(timer.get() + "");
-    		Robot.driveTrain.drive(x, y); 
+    	timePassed = timer.get(); 
+    	if(timePassed < time / 2 )
+    		Robot.driveTrain.drive(0.5, 0.5);
+    	else
+    		Robot.driveTrain.drive( -0.5, -0.5); 
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,8 +41,8 @@ public class AutonDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-	    if (isFinished())
-	    	Robot.driveTrain.drive(0.0, 0.0);
+    	if(isFinished())
+    		Robot.driveTrain.drive(0.0, 0.0); 
     }
 
     // Called when another command which requires one or more of the same

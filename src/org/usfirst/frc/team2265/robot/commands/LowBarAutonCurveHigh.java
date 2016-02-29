@@ -13,10 +13,10 @@ public class LowBarAutonCurveHigh extends CommandGroup {
     	timer.reset();
     	timer.start(); 
     //	while (timer.get() < 0.5) {
-    		new AutonDrive (-1.0,-1.0, 0.5);
+    		new AutonDrive (-1.0,-1.0, 3.0);
     //	}
     	//while(timer.get() < 5.5){
-    		addSequential(new AutonDrive(0.5,0.5, 5.5));
+    		addSequential(new AutonDrive(0.5,0.5, 3.0));
     //	}
     	addSequential(new ShiftToPower());
     	//addSequential(new CurveHigh());

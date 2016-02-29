@@ -11,12 +11,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveOnlyAuton extends CommandGroup {
     
     public  DriveOnlyAuton() {
-    //	requires(Robot.driveTrain);
+    	//requires(Robot.driveTrain);
     	//Timer timer = new Timer();
     	//timer.reset();
     	//timer.start();
     //	while (timer.get() < 0.5) {
-    		addSequential(new AutonDrive (0.5,0.5,3.0));
+    		addSequential(new Jerk()); 
+    		addSequential(new AutonDrive (0.3,0.3, 3.0));
     //	}
     	//addSequential(new Drive(0.5, 0.5));
        // addSequential(new Drive(0.0,0.0));

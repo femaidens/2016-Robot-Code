@@ -6,10 +6,12 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2265.robot.commands.AutonDrive;
+import org.usfirst.frc.team2265.robot.commands.CameraLowBarAuton;
 import org.usfirst.frc.team2265.robot.commands.DriveOnlyAuton;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -35,7 +37,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain driveTrain; 
 
-    Command autonomousCommand;
+    CommandGroup autonomousCommand;
     SendableChooser chooser;
     Compressor compressy; 
 
@@ -51,18 +53,17 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
-//      chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+        chooser.addDefault("Default Auto", new DriveOnlyAuton());
+        chooser.addObject("Second Auton", new CameraLowBarAuton());
+        SmartDashboard.putData("AUTONS", chooser);
+        
         compressy= new Compressor(); 
         driveTrain= new Drivetrain();
         compressy.start(); 
         oi.bindButtons(); 
-        autonomousCommand = new DriveOnlyAuton();
-        SmartDashboard.putData("Auto mode", chooser); 
         ledRing = new Solenoid(7);
-        oi.bindButtons();
         cammy= new Camera(); 
+        autonomousCommand= new DriveOnlyAuton(); 
     }
 	
 	/**
@@ -88,10 +89,17 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        //autonomousCommand = (CommandGroup) chooser.getSelected();
+    	//autonomousCommand= new DriveOnlyAuton(); 
         ledRing.set(true);
-
+        
+        if (autonomousCommand != null) 
+        {
+    		autonomousCommand.start();
+        }
+        	
         System.out.println("AUTON" + table.toString());
+        SmartDashboard.putString("AHHH", "AGHHHHH");
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -105,7 +113,7 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
-    	if (autonomousCommand != null) autonomousCommand.start();
+    	
     }
 
     /**
@@ -133,14 +141,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();  
         //cammy.centering();
-        cammy.testDrive();
-      // cammy.testDrive();
-       /*double defVal= 0.0; 
-       double height = table.getNumber("IMAGE_HEIGHT", defVal);
-       double blobs= table.getNumber("BLOB_COUNT", defVal); 
-       table.containsKey("IMAGE_HEIGHT");
-       SmartDashboard.putNumber("Height:", height);
-       SmartDashboard.putNumber("Blob Count:", blobs);*/
+        driveTrain.drive();
+      
     }
     
     /**
