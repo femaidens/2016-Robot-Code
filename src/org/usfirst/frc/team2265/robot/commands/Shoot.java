@@ -2,6 +2,7 @@ package org.usfirst.frc.team2265.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 
+import org.usfirst.frc.team2265.robot.OI;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
 
@@ -32,6 +33,7 @@ public class Shoot extends Command {
     		Robot.cannon.spinWheels(v*1);
     	if (Robot.cannon.isLow)
     		Robot.cannon.spinWheels(v*0.75);
+    	//OI.turnCam.whenPressed(Robot.cannon.turnCam());
     	//done = true;
     }
 
