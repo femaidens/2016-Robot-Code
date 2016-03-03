@@ -45,12 +45,13 @@ public class RobotMap {
 			public static int rearRightPort = 12;
 			public static int frontRightPort = 13;
 			
-	
+			//Other
+			//Time it takes for the wheels to reach full speed
+			public static double wheelDelay = 1.25; 
+			
+			public static double up = -0.25;
+			public static double down = 0.25;	
+			
+			public static boolean turningCam = false;
 				
-				//Other
-				//Time it takes for the wheels to reach full speed
-				public static double wheelDelay = 1.25; 
-				
-				public static double up = -0.25;
-				public static double down = 0.25;	
 }

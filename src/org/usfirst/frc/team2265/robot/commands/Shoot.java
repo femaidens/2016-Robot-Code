@@ -29,11 +29,21 @@ public class Shoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.compressy.stop(); 
-    	if (Robot.cannon.isHigh)
+    	if (Robot.cannon.isHigh) {
     		Robot.cannon.spinWheels(v*1);
-    	if (Robot.cannon.isLow)
+    		if (RobotMap.turningCam == true) {
+        		Robot.cannon.turnCam();
+        		RobotMap.turningCam = false;
+        	}
+    	}
+    	if (Robot.cannon.isLow) {
     		Robot.cannon.spinWheels(v*0.75);
-    	//OI.turnCam.whenPressed(Robot.cannon.turnCam());
+    		if (RobotMap.turningCam == true) {
+        		Robot.cannon.turnCam();
+        		RobotMap.turningCam = false;
+        	}
+    	}
+    	
     	//done = true;
     }
 

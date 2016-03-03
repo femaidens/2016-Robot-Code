@@ -117,28 +117,12 @@ public class Cannon extends Subsystem {
     }
 
     public void rollerShootPos() {
-    	/*rollerPos.reset();
-    	if (isAcq)
-    		while (rollerPos.getEncPosition() < shootTicks) { rollerPos.set(RobotMap.up); }
-    	if(isGate)
-    		while (rollerPos.getEncPosition() < gateTicks- shootTicks) { rollerPos.set(RobotMap.down); }
-    	isShoot = true;
-    	isAcq= false;
-    	isGate = false; */
     	rollerPos.set(RobotMap.up); 
     	Timer.delay(0.8);
     	rollerPos.set(0.0);
     }
     
     public void rollerAcquirePos() {
-    	/*rollerPos.reset();
-    	if (isShoot)
-    		while (rollerPos.getEncPosition() < acquireTicks) { rollerPos.set(RobotMap.down); }
-    	if(isGate)
-    		while (rollerPos.getEncPosition() < gateTicks) { rollerPos.set(RobotMap.down); }
-    	isShoot = false;
-    	isAcq = true;
-    	isGate = false; */
     	rollerPos.set(RobotMap.down);
     	Timer.delay(0.8);
     	rollerPos.set(0.0);
