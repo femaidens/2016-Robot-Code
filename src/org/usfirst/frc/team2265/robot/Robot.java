@@ -6,12 +6,14 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2265.robot.commands.DriveOnlyAuton;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.subsystems.Camera;
 import org.usfirst.frc.team2265.robot.subsystems.Cannon;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
@@ -34,6 +36,9 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     SendableChooser chooser;
     public static Compressor compressy; 
+    //public static Camera cammy; 
+    public static CameraServer cammy= CameraServer.getInstance(); 
+	
 
     /**
      * This function is run when the robot is first started up and should be
@@ -51,6 +56,9 @@ public class Robot extends IterativeRobot {
         compressy.start(); 
         oi.bindButtons();
         autonomousCommand = new DriveOnlyAuton();
+        //cammy = new Camera(); 
+        cammy.setQuality(50); 
+    	cammy.startAutomaticCapture("cam1");
         
     }
 	

@@ -13,8 +13,7 @@ import org.usfirst.frc.team2265.robot.commands.TurnCam;
 import org.usfirst.frc.team2265.robot.commands.Acquire;
 import org.usfirst.frc.team2265.robot.commands.Curve;
 //import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.commands.RollerToAcq;
-import org.usfirst.frc.team2265.robot.commands.RollerToShoot;
+import org.usfirst.frc.team2265.robot.commands.ToggleRoller;
 import org.usfirst.frc.team2265.robot.commands.Shoot;
 import org.usfirst.frc.team2265.robot.commands.StopCannon;
 import org.usfirst.frc.team2265.robot.commands.ToggleCannon;
@@ -61,10 +60,10 @@ public class OI {
 	Button shoot = new JoystickButton(atkJoy, 1); //button a
 	Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
-	Button rollerToShoot = new JoystickButton(rightJoy, 1);//right trigger
-	Button rollerToAcq = new JoystickButton(leftJoy, 1);//lfet trigger
-	public Button turnCam = new JoystickButton(atkJoy, 3); // left thumb button. 
-	Button reverseCam = new JoystickButton(leftJoy, 3);
+	Button toggleRoller = new JoystickButton(atkJoy, 3);// button x
+	public Button turnCam = new JoystickButton(atkJoy, 7); // back button. 
+	Button reverseCam = new JoystickButton(leftJoy, 8); // Start Button
+	
 	
 	//Button curveLeft = new JoystickButton(atkJoy, 5);
 	//Button curveRight = new JoystickButton(atkJoy,6);
@@ -77,8 +76,7 @@ public class OI {
 		toggleCannonPos.whenPressed(new ToggleCannon());
 		acquire.whileHeld(new Acquire());
 		acquire.whenReleased(new StopCannon());
-		rollerToShoot.whenPressed(new RollerToShoot());
-		rollerToAcq.whenPressed(new RollerToAcq());
+		toggleRoller.whenPressed(new ToggleRoller());
 		turnCam.whenPressed(new TurnCam()); 
 		turnCam.whenReleased(new StopCannon());
 		reverseCam.whileHeld(new ReverseCam()); 
