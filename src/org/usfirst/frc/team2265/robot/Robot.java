@@ -2,16 +2,19 @@
 package org.usfirst.frc.team2265.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import org.usfirst.frc.team2265.robot.commands.DriveOnlyAuton;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-<<<<<<< HEAD
-import org.usfirst.frc.team2265.robot.subsystems.Climber;
-=======
->>>>>>> refs/remotes/origin/Drivetrain
+import org.usfirst.frc.team2265.robot.subsystems.Camera;
+import org.usfirst.frc.team2265.robot.subsystems.Cannon;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -28,28 +31,35 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static Climber climber;
-	public static Drivetrain drivetrain;
-
+	public static Drivetrain driveTrain;  
+	public static Cannon cannon;
     Command autonomousCommand;
     SendableChooser chooser;
-    Compressor compressy; 
+    public static Compressor compressy; 
+    //public static Camera cammy; 
+    public static CameraServer cammy= CameraServer.getInstance(); 
+	
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	climber = new Climber();
 		oi = new OI();
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
+        cannon = new Cannon(); 
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         compressy= new Compressor(); 
         driveTrain= new Drivetrain();
         compressy.start(); 
-        oi.bindButtons(); 
+        oi.bindButtons();
+        autonomousCommand = new DriveOnlyAuton();
+        //cammy = new Camera(); 
+        cammy.setQuality(50); 
+    	cammy.startAutomaticCapture("cam1");
+        
     }
 	
 	/**
@@ -75,8 +85,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
-        
+        //autonomousCommand = (Command) chooser.getSelected();
+    	 
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
@@ -89,6 +99,7 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
+    	System.out.println("SAUCY");
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -105,6 +116,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        	
+        	
     }
 
     /**
@@ -112,7 +125,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        driveTrain.drive(); 
+        driveTrain.drive();  
+        driveTrain.toString(); 
     }
     
     /**

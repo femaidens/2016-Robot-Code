@@ -1,43 +1,50 @@
 package org.usfirst.frc.team2265.robot.commands;
 
+import org.usfirst.frc.team2265.robot.Robot;
+
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team2265.robot.commands.Drive;
-
-
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class AutonDrive extends CommandGroup {
-    
-    public  AutonDrive() {
-        // Add Commands here:
-        addSequential(new Drive(0.5, 0.5));
-        Timer.delay(1000);
-        addSequential(new Drive(-0.5, -0.5));
-        Timer.delay(1000);
-        addSequential(new Drive(0.0,0.0));
-      
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
+public class AutonDrive extends Command {
 
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    double x, y, time, timePassed; 
+    Timer timer; 
+	public AutonDrive(double xDir, double yDir, double seconds) {
+        //requires(Robot.driveTrain); 
+        x= xDir; 
+        y= yDir;
+        time= seconds;  
     }
 
-	
-		// TODO Auto-generated method stub
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	timer = new Timer(); 
+    	timer.start(); 
+    }
 
-	}
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	    timePassed= timer.get();
+    		System.out.println(timer.get() + "");
+    		Robot.driveTrain.drive(x, y); 
+    }
 
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return timePassed > time;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+	    if (isFinished())
+	    	Robot.driveTrain.drive(0.0, 0.0);
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
+}
