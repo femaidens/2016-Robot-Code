@@ -32,6 +32,7 @@ public class RobotMap {
 			public static int acquirer = 1;
 			public static int camTalonPort = 11;
 			
+			// ACTUAL ROBOT PORTS. 
 			/*public static int rearLeftPort = 7;
 			public static int frontLeftPort = 8;
 			
@@ -39,11 +40,11 @@ public class RobotMap {
 			public static int frontRightPort = 10;*/
 			
 			//test ports
-			public static int rearLeftPort = 2;
-			public static int frontLeftPort = 1;
+			public static int rearLeftPort = 12;
+			public static int frontLeftPort = 2;
 			
-			public static int rearRightPort = 12;
-			public static int frontRightPort = 13;
+			public static int rearRightPort = 13;
+			public static int frontRightPort = 1;
 			
 			//Other
 			//Time it takes for the wheels to reach full speed

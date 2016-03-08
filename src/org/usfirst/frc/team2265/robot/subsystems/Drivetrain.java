@@ -38,8 +38,8 @@ public class Drivetrain extends Subsystem {
     }
 
 	public void drive(){
-		double leftVal= -leftJoy.getY();
-		double rightVal= -rightJoy.getY(); 
+		double leftVal= leftJoy.getY();
+		double rightVal= rightJoy.getY(); 
 		TankDrive.tankDrive(leftVal, rightVal); 
 		SmartDashboard.putNumber("Right Encoder Values", frontRight.getEncVelocity());
 		SmartDashboard.putNumber("Left Encoder Vals" , frontLeft.getEncVelocity());
