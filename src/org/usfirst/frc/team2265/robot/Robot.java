@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain driveTrain;  
 	public static Cannon cannon;
-    Command autonomousCommand;
+    CommandGroup autonomousCommand;
     SendableChooser chooser;
     public static Compressor compressy; 
     //public static Camera cammy; 
@@ -47,7 +47,12 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
+        chooser.addDefault("Low bar Auto", new AutoZone(1));
+        chooser.addObject("Zone 2 Auton", new AutoZone(2)); 
+        chooser.addObject("Zone 3 Auton", new AutoZone(3)); 
+        chooser.addObject("Zone 4 Auton", new AutoZone(4));
+        chooser.addObject("Zone 5 Auton", new AutoZone(5)); 
+        
         cannon = new Cannon(); 
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
@@ -85,21 +90,28 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        //autonomousCommand = (Command) chooser.getSelected();
+        autonomousCommand = (CommandGroup) chooser.getSelected();
     	 
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
+    	String autoSelected = SmartDashboard.getString("Auto Selector", "Low bar Auto");
     	
-    	// schedule the autonomous command (example)
-    	System.out.println("SAUCY");
+		switch(autoSelected) {
+		case "Zone 2 Auto":
+			autonomousCommand = new AutoZone(2);
+			break;
+		case "Zone 3 Auto":
+			autonomousCommand = new AutoZone(3);
+			break; 
+		case "Zone 4 Auto": 
+			autonomousCommand = new AutoZone(4); 
+			break; 
+		case "Zone 5 Auto":  
+			autonomousCommand = new AutoZone(5); 
+			break; 
+		default:
+			autonomousCommand = new AutoZone(1);
+			break;
+		} 
+    	
         if (autonomousCommand != null) autonomousCommand.start();
     }
 

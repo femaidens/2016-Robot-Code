@@ -32,6 +32,7 @@ public class RobotMap {
 			public static int acquirer = 1;
 			public static int camTalonPort = 11;
 			
+			//REAL DRIVE TALON PORTS. 
 			/*public static int rearLeftPort = 7;
 			public static int frontLeftPort = 8;
 			
