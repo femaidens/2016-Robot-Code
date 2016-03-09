@@ -17,7 +17,6 @@ public class Shoot extends Command {
     public Shoot(double velocity) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires (Robot.cannon);
     	v = velocity;
     }
 

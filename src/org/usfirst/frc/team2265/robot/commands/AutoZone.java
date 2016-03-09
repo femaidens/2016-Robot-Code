@@ -12,14 +12,16 @@ public class AutoZone extends CommandGroup {
     
     public AutoZone(int zone) {
     	
-    	addSequential(new Jerk()); 
-		addSequential(new AutonDrive (0.3, 0.3, 3.0)); //change time after practicing
+    	addSequential(new Jerk()); //works
+		
 		switch(zone){
 			case 1: //lowbar
+				addSequential(new AutonDrive (-0.3, -0.3, 3.0)); //change time after practicing
 				addSequential(new AutonDrive (0.2, -0.2, 2.0)); //test for time and speed for turning
 				break; 
 			case 2: //turn right if goal not found
-				addSequential(new AutonDrive (-0.2, 0.2, 1.5)); //test for time and speed for turning
+				addSequential(new AutonDrive (-0.7, -0.7, 1.5)); //test for time and speed for turning
+				addSequential(new AutonDrive (0.3, -0.3, 3.0)); //change time after practicing
 				break;
 			case 3: //probably turn right
 				addSequential(new AutonDrive (0.2, -0.2, 1.0)); //test for time and speed for turning
@@ -34,15 +36,15 @@ public class AutoZone extends CommandGroup {
 				addSequential(new AutonDrive (0.2, -0.2, 2.0)); //test for time and speed for turning
 				break;
 		}
-		
-		addSequential(new ToggleRoller()); //move roller up
+
+		addSequential(new ToggleRoller()); //move roller up*/
 		addSequential(new ToggleCannon()); //move cannon up
 		addSequential(new SquareUp());
 		//input distance fixing command
 		addSequential(new Shoot(1.0)); //shoot into high goal
 		Timer.delay(1.0);
 		RobotMap.turningCam = true; //turns cam after one second
-		addSequential(new StopCannon()); //stops cannon
+		addSequential(new StopCannon());
 		
         // Add Commands here:
         // e.g. addSequential(new Command1());

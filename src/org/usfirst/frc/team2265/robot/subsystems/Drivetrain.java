@@ -51,7 +51,7 @@ public class Drivetrain extends Subsystem {
     	rearRight.set(-x);
     	
     	frontLeft.set(y);
-    	frontLeft.set(y);
+    	rearLeft.set(y);
     }
     public void shiftToSpeed(){
     	gearShifter.set(DoubleSolenoid.Value.kReverse); 

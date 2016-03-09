@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain driveTrain;  
 	public static Cannon cannon;
     CommandGroup autonomousCommand;
-    //SendableChooser chooser;
+    SendableChooser autonChooser;
     public static Compressor compressy; 
     //public static Camera cammy; 
     public static CameraServer cammy= CameraServer.getInstance(); 
@@ -47,12 +47,13 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        /*chooser = new SendableChooser();
-        chooser.addDefault("Low bar Auto", new AutoZone(1));
-        chooser.addObject("Zone 2 Auton", new AutoZone(2)); 
-        chooser.addObject("Zone 3 Auton", new AutoZone(3)); 
-        chooser.addObject("Zone 4 Auton", new AutoZone(4));
-        chooser.addObject("Zone 5 Auton", new AutoZone(5)); */ 
+        autonChooser = new SendableChooser();
+        autonChooser.addDefault("Low bar Auto", new AutoZone(1));
+        autonChooser.addObject("Zone 2 Auton", new AutoZone(2)); 
+        autonChooser.addObject("Zone 3 Auton", new AutoZone(3)); 
+        autonChooser.addObject("Zone 4 Auton", new AutoZone(4));
+        autonChooser.addObject("Zone 5 Auton", new AutoZone(5)); 
+        SmartDashboard.putData("Autonomous Choices: ", autonChooser);
         
         cannon = new Cannon(); 
 //        chooser.addObject("My Auto", new MyAutoCommand());
@@ -61,11 +62,12 @@ public class Robot extends IterativeRobot {
         driveTrain= new Drivetrain();
         compressy.start(); 
         oi.bindButtons();
-        autonomousCommand = new DriveOnlyAuton();
+    
         //cammy = new Camera(); 
         cammy.setQuality(50); 
     	cammy.startAutomaticCapture("cam1");
-        
+
+        autonomousCommand = (CommandGroup) autonChooser.getSelected();
     }
 	
 	/**
@@ -91,31 +93,10 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (CommandGroup) new AutoZone(1);
-    	 
-    	String autoSelected = SmartDashboard.getString("Auto Selector", "Low bar Auto");
-    	
-		switch(autoSelected) {
-		case "Zone 2 Auto":
-			autonomousCommand = new AutoZone(2);
-			break;
-		case "Zone 3 Auto":
-			autonomousCommand = new AutoZone(3);
-			break; 
-		case "Zone 4 Auto": 
-			autonomousCommand = new AutoZone(4); 
-			break; 
-		case "Zone 5 Auto":  
-			autonomousCommand = new AutoZone(5); 
-			break; 
-		default:
-			autonomousCommand = new AutoZone(1);
-			break;
-		} 
-    	
-        if (autonomousCommand != null) autonomousCommand.start();
+        
+  
+    	if(autonomousCommand != null) autonomousCommand.start();
     }
-
     /**
      * This function is called periodically during autonomous
      */

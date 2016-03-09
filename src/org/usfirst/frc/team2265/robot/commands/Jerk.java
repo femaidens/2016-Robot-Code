@@ -17,7 +17,7 @@ public class Jerk extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 		timer = new Timer();
-		time = 0.5; 
+		time = .5; 
     }
 
     // Called just before this Command runs the first time
