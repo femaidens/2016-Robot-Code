@@ -29,7 +29,7 @@ public class Shoot extends Command {
     protected void execute() {
     	Robot.compressy.stop(); 
     	if (Robot.cannon.isHigh) {
-    		Robot.cannon.spinWheels(v*1);
+    		Robot.cannon.spinWheels(v);
     		if (RobotMap.turningCam == true) {
         		Robot.cannon.turnCam();
         		RobotMap.turningCam = false;

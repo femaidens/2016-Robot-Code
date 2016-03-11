@@ -10,17 +10,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoZone extends CommandGroup {
     
-    public AutoZone(int zone) {
+    public AutoZone(int zone, double speed) {
     	
     	addSequential(new Jerk()); //works
+    	addSequential(new AutonDrive (speed, speed, 3.0));
 		
 		switch(zone){
 			case 1: //lowbar
-				addSequential(new AutonDrive (-0.3, -0.3, 3.0)); //change time after practicing
 				addSequential(new AutonDrive (0.2, -0.2, 2.0)); //test for time and speed for turning
 				break; 
 			case 2: //turn right if goal not found
-				addSequential(new AutonDrive (-0.7, -0.7, 1.5)); //test for time and speed for turning
 				addSequential(new AutonDrive (0.3, -0.3, 3.0)); //change time after practicing
 				break;
 			case 3: //probably turn right

@@ -35,10 +35,9 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain driveTrain;  
 	public static Cannon cannon;
     CommandGroup autonomousCommand;
-    SendableChooser autonChooser;
+    SendableChooser autonChooser, speedChooser;
     public static Compressor compressy; 
-    //public static Camera cammy; 
-    public static CameraServer cammy= CameraServer.getInstance(); 
+    public static Camera cammy;  
 	
 
     /**
@@ -48,24 +47,23 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         autonChooser = new SendableChooser();
-        autonChooser.addDefault("Low bar Auto", new AutoZone(1));
-        autonChooser.addObject("Zone 2 Auton", new AutoZone(2)); 
-        autonChooser.addObject("Zone 3 Auton", new AutoZone(3)); 
-        autonChooser.addObject("Zone 4 Auton", new AutoZone(4));
-        autonChooser.addObject("Zone 5 Auton", new AutoZone(5)); 
+        double s = SmartDashboard.getNumber("Speed", 0.4);
+        
+        autonChooser.addDefault("Low bar Auto", new AutoZone(1, s));
+        autonChooser.addObject("Zone 2 Auton", new AutoZone(2, s)); 
+        autonChooser.addObject("Zone 3 Auton", new AutoZone(3, s)); 
+        autonChooser.addObject("Zone 4 Auton", new AutoZone(4, s));
+        autonChooser.addObject("Zone 5 Auton", new AutoZone(5, s)); 
+        
         SmartDashboard.putData("Autonomous Choices: ", autonChooser);
         
         cannon = new Cannon(); 
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        //SmartDashboard.putData("Auto mode", chooser);
         compressy= new Compressor(); 
         driveTrain= new Drivetrain();
         compressy.start(); 
         oi.bindButtons();
     
         //cammy = new Camera(); 
-        cammy.setQuality(50); 
-    	cammy.startAutomaticCapture("cam1");
 
         autonomousCommand = (CommandGroup) autonChooser.getSelected();
     }

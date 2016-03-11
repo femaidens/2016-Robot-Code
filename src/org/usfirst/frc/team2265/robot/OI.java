@@ -62,7 +62,7 @@ public class OI {
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
 	Button toggleRoller = new JoystickButton(atkJoy, 3);// button x
 	public Button turnCam = new JoystickButton(atkJoy, 7); // back button. 
-	Button reverseCam = new JoystickButton(leftJoy, 8); // Start Button
+	Button reverseCam = new JoystickButton(atkJoy, 8); // Start Button
 	
 	
 	//Button curveLeft = new JoystickButton(atkJoy, 5);
