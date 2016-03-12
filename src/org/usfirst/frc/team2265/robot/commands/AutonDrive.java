@@ -14,8 +14,8 @@ public class AutonDrive extends Command {
     Timer timer; 
 	public AutonDrive(double xDir, double yDir, double seconds) {
         //requires(Robot.driveTrain); 
-        x= xDir; 
-        y= yDir;
+        x= -xDir; 
+        y= -yDir;
         time= seconds;  
     }
 

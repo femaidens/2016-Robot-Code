@@ -26,7 +26,8 @@ public class ToggleMode extends Command {
     	
     	if (Robot.driveTrain.get().equals(Value.kForward)|| Robot.driveTrain.get().equals(Value.kOff)){
     		Robot.driveTrain.shiftToSpeed();
-    		SmartDashboard.putString("Mode: ", "Speed Mode");
+    		SmartDashboard.putString("DB/String 0", "Mode: Speed Mode");
+    		//SmartDashboard.putString("Mode: ", "Speed Mode");
     		shifted = true;
     		return;
     		
@@ -34,7 +35,8 @@ public class ToggleMode extends Command {
     	
     	if(Robot.driveTrain.get().equals(Value.kReverse)|| Robot.driveTrain.get().equals(Value.kOff)){
     		Robot.driveTrain.shiftToPower(); 
-    		SmartDashboard.putString("Mode: ", "Power Mode");
+    		SmartDashboard.putString("DB/String 0", "Mode: Power Mode");
+    		//SmartDashboard.putString("Mode: ", "Power Mode");
     		shifted = true; 
     		return;
     	}

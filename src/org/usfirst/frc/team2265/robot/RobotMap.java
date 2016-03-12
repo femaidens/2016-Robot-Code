@@ -1,4 +1,5 @@
 
+
 package org.usfirst.frc.team2265.robot;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -50,9 +51,16 @@ public class RobotMap {
 			//Time it takes for the wheels to reach full speed
 			public static double wheelDelay = 1.25; 
 			
-			public static double up = -0.25;
-			public static double down = 0.25;	
+			public static double up = -0.45;
+			public static double down = 0.45;	
 			
 			public static boolean turningCam = false;
+			
+			public static int leftEncPort = 0;
+			public static int leftEncPort2 = 1;
+			
+			public static int rightEncPort = 2;
+			public static int rightEncPort2 = 3;
+			
 				
 }

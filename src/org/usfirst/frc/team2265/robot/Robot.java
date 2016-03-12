@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2265.robot.commands.AutoZone;
 import org.usfirst.frc.team2265.robot.commands.DriveOnlyAuton;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.commands.LowBarAuton;
+import org.usfirst.frc.team2265.robot.commands.RockWallAuton;
 import org.usfirst.frc.team2265.robot.subsystems.Camera;
 import org.usfirst.frc.team2265.robot.subsystems.Cannon;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
@@ -35,9 +37,10 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain driveTrain;  
 	public static Cannon cannon;
     CommandGroup autonomousCommand;
-    SendableChooser autonChooser, speedChooser;
+    public static SendableChooser zoneChooser, defenseChooser;
     public static Compressor compressy; 
-    public static Camera cammy;  
+    public static CameraServer cammy; 
+    //public static Camera cammy; 
 	
 
     /**
@@ -46,16 +49,28 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        autonChooser = new SendableChooser();
-        double s = SmartDashboard.getNumber("Speed", 0.4);
+        defenseChooser = new SendableChooser();
+        zoneChooser = new SendableChooser(); 
+        //double s = SmartDashboard.getNumber("Speed", 0.4);
         
-        autonChooser.addDefault("Low bar Auto", new AutoZone(1, s));
-        autonChooser.addObject("Zone 2 Auton", new AutoZone(2, s)); 
-        autonChooser.addObject("Zone 3 Auton", new AutoZone(3, s)); 
-        autonChooser.addObject("Zone 4 Auton", new AutoZone(4, s));
-        autonChooser.addObject("Zone 5 Auton", new AutoZone(5, s)); 
+        /*zoneChooser.addDefault("Zone 1", new AutoZone(1));
+        zoneChooser.addObject("Zone 2", new AutoZone(2)); 
+        zoneChooser.addObject("Zone 3", new AutoZone(3)); 
+        zoneChooser.addObject("Zone 4", new AutoZone(4));
+        zoneChooser.addObject("Zone 5", new AutoZone(5));
         
-        SmartDashboard.putData("Autonomous Choices: ", autonChooser);
+        defenseChooser.addDefault("Low Bar", new LowBarAuton());
+        defenseChooser.addObject("Rock Wall", new RockWallAuton()); */
+        
+        /*autonChooser.addDefault("Low bar Auto", new AutoZone((int)turnChooser.getSelected(), "Low bar Auto"));
+        autonChooser.addObject("Moat Auto", new AutoZone((int)turnChooser.getSelected(), "Moat Auto")); 
+        autonChooser.addObject("Rampart Auto", new AutoZone((int)turnChooser.getSelected(), "Rampart Auto")); 
+        autonChooser.addObject("Rough Terrain Auto", new AutoZone((int)turnChooser.getSelected(), "Rough Terrain Auto"));
+        autonChooser.addObject("Rock Wall Auto", new AutoZone((int)turnChooser.getSelected(), "Rock Wall Auto")); */
+        
+        
+        SmartDashboard.putData("Zone Choices: ", zoneChooser);
+        SmartDashboard.putData("Defense Choices: ", defenseChooser);
         
         cannon = new Cannon(); 
         compressy= new Compressor(); 
@@ -64,8 +79,11 @@ public class Robot extends IterativeRobot {
         oi.bindButtons();
     
         //cammy = new Camera(); 
+        cammy = CameraServer.getInstance();
+        cammy.setQuality(50); 
+        cammy.startAutomaticCapture("cam0"); 
 
-        autonomousCommand = (CommandGroup) autonChooser.getSelected();
+        autonomousCommand = (CommandGroup) new LowBarAuton();
     }
 	
 	/**
@@ -91,8 +109,9 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        
-  
+    	
+    	
+    	
     	if(autonomousCommand != null) autonomousCommand.start();
     }
     /**

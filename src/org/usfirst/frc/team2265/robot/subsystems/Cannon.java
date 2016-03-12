@@ -37,14 +37,14 @@ public class Cannon extends Subsystem {
         rollerPos = new CANTalon(RobotMap.acquirer);
         camTalon = new CANTalon(RobotMap.camTalonPort);
         
-        camSecs = .75;
+        camSecs = .86;
         shootTicks = 1500;
         acquireTicks = 1800;
         gateTicks = 2100; 
         
         isAcq= true;
-        isLow = true;
-        isHigh = false; 
+        isLow = false;
+        isHigh = true; 
         
         cannonPiston = new Piston(RobotMap.cannonSolPort1, RobotMap.cannonSolPort2, RobotMap.cannonSolPort3, RobotMap.cannonSolPort4);
         
@@ -89,7 +89,7 @@ public class Cannon extends Subsystem {
     
     public void turnCam() { 
         //while (timer.get() < camSecs) 
-        camTalon.set(.878);
+        camTalon.set(.87);
         Timer.delay(camSecs);
         camTalon.set(0.0); 
         isShooting = true; 
@@ -118,13 +118,13 @@ public class Cannon extends Subsystem {
 
     public void rollerShootPos() {
     	rollerPos.set(RobotMap.up); 
-    	Timer.delay(0.8);
+    	Timer.delay(0.5);
     	rollerPos.set(0.0);
     }
     
     public void rollerAcquirePos() {
     	rollerPos.set(RobotMap.down);
-    	Timer.delay(0.8);
+    	Timer.delay(0.5);
     	rollerPos.set(0.0);
     }
     

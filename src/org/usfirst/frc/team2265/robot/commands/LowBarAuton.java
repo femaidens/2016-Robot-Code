@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2265.robot.commands;
 
+import org.usfirst.frc.team2265.robot.Robot;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -9,9 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LowBarAuton extends CommandGroup {
     
     public  LowBarAuton() {
-    	
-    	addSequential(new Drive(0.5, 0.5)); 
-    	Timer.delay(1000);
+    	addSequential(new Jerk());
+    	addSequential(new ToggleCannon());
+    	addSequential(new AutonDrive(-0.3, -0.3, 5.0));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

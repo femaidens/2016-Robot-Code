@@ -28,10 +28,10 @@ public class Jerk extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	timePassed = timer.get(); 
-    	if(timePassed < time / 2 )
-    		Robot.driveTrain.drive(0.5, 0.5);
+    	if(timePassed < time / 1.5 )
+    		Robot.driveTrain.drive(1.0, 1.0);
     	else
-    		Robot.driveTrain.drive( -0.5, -0.5); 
+    		Robot.driveTrain.drive( -1.0, -1.00); 
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -20,23 +20,25 @@ public class ToggleRoller extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.cannon.rollerAcquirePos();
-    	position = 0; 
+    	position = 0;  
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.cannon.rollerAcquirePos();
     	if(position == 0)
     	{
     		Robot.cannon.rollerShootPos(); 
     		position++; 
+    		done = true;
+    		return;
     	}
     	else if (position == 1){
     		Robot.cannon.rollerAcquirePos();
     		position--; 
+    		done = true;
+    		return;
     	}
-    	done= true; 
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -46,6 +48,7 @@ public class ToggleRoller extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.cannon.rollerPos.set(0.0);
     }
 
     // Called when another command which requires one or more of the same

@@ -1,23 +1,45 @@
 package org.usfirst.frc.team2265.robot.commands;
 
+import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * low bar 0.3 for 4 s
+ * ramparts 0.45 for 5 s
+ * rock wall 0.6 time = 6
+ * rough terrain 0.6 time = 6
+ * moat .75 for 3 s
  */
 public class AutoZone extends CommandGroup {
-    
-    public AutoZone(int zone, double speed) {
+    double sp1,t;
+    public AutoZone(int zone) {
+    	
+    	/*if(Robot.autonChooser.getSelected().equals("Low bar Auto")){
+    		sp1 = 0.3; 
+    		t= 4; 
+    	}
+    	else if(Robot.autonChooser.getSelected().equals("Moat Auto")){
+    		sp1 = 0.75; 
+    		t= 3; 
+    	}
+    	else if(Robot.autonChooser.getSelected().equals("Rampart Auto")){
+    		sp1 = 0.45; 
+    		t= 5; 
+    	}
+    	else if(Robot.autonChooser.getSelected().equals("Rough Terrain Auto")){
+    		sp1 = 0.6; 
+    		t= 6; 
+    	} */
     	
     	addSequential(new Jerk()); //works
-    	addSequential(new AutonDrive (speed, speed, 3.0));
+    	addSequential(new AutonDrive (-0.4, -0.4, 5.5));
 		
 		switch(zone){
 			case 1: //lowbar
-				addSequential(new AutonDrive (0.2, -0.2, 2.0)); //test for time and speed for turning
+				addSequential(new AutonDrive (-0.2, 0.2, 3.0)); //test for time and speed for turning
 				break; 
 			case 2: //turn right if goal not found
 				addSequential(new AutonDrive (0.3, -0.3, 3.0)); //change time after practicing
@@ -38,9 +60,9 @@ public class AutoZone extends CommandGroup {
 
 		addSequential(new ToggleRoller()); //move roller up*/
 		addSequential(new ToggleCannon()); //move cannon up
-		addSequential(new SquareUp());
+		//addSequential(new SquareUp());
 		//input distance fixing command
-		addSequential(new Shoot(1.0)); //shoot into high goal
+		//addSequential(new Shoot(1.0)); //shoot into high goal
 		Timer.delay(1.0);
 		RobotMap.turningCam = true; //turns cam after one second
 		addSequential(new StopCannon());

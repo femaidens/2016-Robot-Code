@@ -24,11 +24,13 @@ public class ToggleCannon extends Command {
     protected void execute() {
     	if (Robot.cannon.isHigh){
     			Robot.cannon.lowerCannon();
+    			System.out.println("cannoon at low");
     			done = true;
     			return;
     	}
     	if(Robot.cannon.isLow) {
     			Robot.cannon.liftCannon();
+    			System.out.println("Cannon is high");
     			done = true; 
     			return;
     	}

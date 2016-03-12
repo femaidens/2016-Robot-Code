@@ -8,6 +8,8 @@ import org.usfirst.frc.team2265.robot.commands.Collision;
 import org.usfirst.frc.team2265.robot.commands.Drive;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.ReverseCam;
+import org.usfirst.frc.team2265.robot.commands.RollerDown;
+import org.usfirst.frc.team2265.robot.commands.RollerUp;
 import org.usfirst.frc.team2265.robot.commands.ToggleMode;
 import org.usfirst.frc.team2265.robot.commands.TurnCam;
 import org.usfirst.frc.team2265.robot.commands.Acquire;
@@ -60,9 +62,12 @@ public class OI {
 	Button shoot = new JoystickButton(atkJoy, 1); //button a
 	Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
-	Button toggleRoller = new JoystickButton(atkJoy, 3);// button x
+	//Button toggleRoller = new JoystickButton(atkJoy, 3);// button x
 	public Button turnCam = new JoystickButton(atkJoy, 7); // back button. 
 	Button reverseCam = new JoystickButton(atkJoy, 8); // Start Button
+	Button rollerUp = new JoystickButton (atkJoy, 5); //Right
+	Button rollerDown = new JoystickButton (atkJoy, 6); //Right
+	
 	
 	
 	//Button curveLeft = new JoystickButton(atkJoy, 5);
@@ -76,11 +81,13 @@ public class OI {
 		toggleCannonPos.whenPressed(new ToggleCannon());
 		acquire.whileHeld(new Acquire());
 		acquire.whenReleased(new StopCannon());
-		toggleRoller.whenPressed(new ToggleRoller());
+		//toggleRoller.whenPressed(new ToggleRoller());
 		turnCam.whenPressed(new TurnCam()); 
 		turnCam.whenReleased(new StopCannon());
-		reverseCam.whileHeld(new ReverseCam()); 
+		reverseCam.whenPressed(new ReverseCam()); 
 		reverseCam.whenReleased(new StopCannon());
+		rollerUp.whenPressed(new RollerUp());
+		rollerDown.whenPressed(new RollerDown());
 		
 		//curveLeft.whenPressed(new Curve(false));
 		//curveRight.whenPressed(new Curve(true));
