@@ -64,7 +64,7 @@ public class OI {
 	Button acquire = new JoystickButton(atkJoy, 2); //button b
 	//Button toggleRoller = new JoystickButton(atkJoy, 3);// button x
 	public Button turnCam = new JoystickButton(atkJoy, 7); // back button. 
-	Button reverseCam = new JoystickButton(atkJoy, 8); // Start Button
+	//Button reverseCam = new JoystickButton(atkJoy, 8); // Start Button
 	Button rollerUp = new JoystickButton (atkJoy, 5); //Right
 	Button rollerDown = new JoystickButton (atkJoy, 6); //Right
 	
@@ -84,8 +84,8 @@ public class OI {
 		//toggleRoller.whenPressed(new ToggleRoller());
 		turnCam.whenPressed(new TurnCam()); 
 		turnCam.whenReleased(new StopCannon());
-		reverseCam.whenPressed(new ReverseCam()); 
-		reverseCam.whenReleased(new StopCannon());
+		/*reverseCam.whenPressed(new ReverseCam()); 
+		reverseCam.whenReleased(new StopCannon());*/
 		rollerUp.whenPressed(new RollerUp());
 		rollerDown.whenPressed(new RollerDown());
 		

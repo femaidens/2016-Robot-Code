@@ -28,7 +28,7 @@ public class Shoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.compressy.stop(); 
+    	//Robot.compressy.stop(); 
     	if (Robot.cannon.isHigh) {
     		Robot.cannon.spinWheels(v);
     		if (RobotMap.turningCam == true) {
@@ -43,7 +43,7 @@ public class Shoot extends Command {
         		RobotMap.turningCam = false;
         	}
     	}
-    	
+    	RobotMap.turningCam = false; 
     	//done = true;
     }
 
@@ -54,7 +54,7 @@ public class Shoot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.compressy.start();
+    	//Robot.compressy.start();
     	RobotMap.turningCam = false; 
     }
 

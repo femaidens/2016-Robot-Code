@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2265.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -15,7 +16,7 @@ import org.usfirst.frc.team2265.robot.commands.AutoZone;
 import org.usfirst.frc.team2265.robot.commands.DriveOnlyAuton;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.LowBarAuton;
-import org.usfirst.frc.team2265.robot.commands.RockWallAuton;
+import org.usfirst.frc.team2265.robot.commands.RWRTAuton;
 import org.usfirst.frc.team2265.robot.subsystems.Camera;
 import org.usfirst.frc.team2265.robot.subsystems.Cannon;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
@@ -83,7 +84,8 @@ public class Robot extends IterativeRobot {
         cammy.setQuality(50); 
         cammy.startAutomaticCapture("cam0"); 
 
-        autonomousCommand = (CommandGroup) new LowBarAuton();
+        //autonomousCommand = (CommandGroup) new LowBarAuton();
+        autonomousCommand = (CommandGroup) new RWRTAuton();
     }
 	
 	/**
@@ -111,7 +113,12 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	
     	
-    	
+    	if(driveTrain.gearShifter.get()== DoubleSolenoid.Value.kForward ){
+    		driveTrain.gearShifter.set(DoubleSolenoid.Value.kReverse);
+    	}
+    	if(driveTrain.gearShifter2.get() == DoubleSolenoid.Value.kForward){
+    		driveTrain.gearShifter.set(DoubleSolenoid.Value.kReverse); 
+    	}
     	if(autonomousCommand != null) autonomousCommand.start();
     }
     /**

@@ -40,6 +40,8 @@ public class RobotMap {
 			public static int rearRightPort = 9;
 			public static int frontRightPort = 10;
 			
+			//public static int limitSwitch = 0; 
+			
 			//test ports
 			/*public static int rearLeftPort = 12;
 			public static int frontLeftPort = 2;

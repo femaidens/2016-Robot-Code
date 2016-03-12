@@ -2,6 +2,7 @@ package org.usfirst.frc.team2265.robot.subsystems;
 
 import org.usfirst.frc.team2265.robot.RobotMap;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Piston;
@@ -16,6 +17,7 @@ public class Cannon extends Subsystem {
     public boolean isShooting = false;
 
     private double shootTicks, acquireTicks, gateTicks, camSecs;
+    //public DigitalInput limitSwitch; 
     /*
      * shootTicks: ticks to go from acquire to shoot
      * gateTicks; ticks to go from acquire to gate
@@ -36,8 +38,9 @@ public class Cannon extends Subsystem {
         roller = new CANTalon(RobotMap.rollerPort);
         rollerPos = new CANTalon(RobotMap.acquirer);
         camTalon = new CANTalon(RobotMap.camTalonPort);
+        //limitSwitch = new DigitalInput(RobotMap.)
         
-        camSecs = .86;
+        camSecs = .78;
         shootTicks = 1500;
         acquireTicks = 1800;
         gateTicks = 2100; 
@@ -92,7 +95,13 @@ public class Cannon extends Subsystem {
         camTalon.set(.87);
         Timer.delay(camSecs);
         camTalon.set(0.0); 
-        isShooting = true; 
+        isShooting = true;
+        /*if(limitSwitch.get() == 0){
+        	camTalon.set(0.57);
+        }
+        else{
+        	camTalon.set(0.0);
+        } */
     }
     
     public void reverseCam() {
