@@ -15,6 +15,7 @@ import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
+	//declares robot objects
 	public static OI oi;
 	public static Drivetrain driveTrain;  
 	public static Cannon cannon;
@@ -22,6 +23,7 @@ public class Robot extends IterativeRobot {
     public static Compressor compressy; 
     public static CameraServer cammy; 
 	
+    //initializes robot objects
     public void robotInit() {
 		oi = new OI();
 		cannon = new Cannon(); 
@@ -34,8 +36,9 @@ public class Robot extends IterativeRobot {
         cammy.setQuality(50); 
         cammy.startAutomaticCapture("cam0"); 
         
-        //autonomousCommand = (CommandGroup) new LowBarAuton();
-        autonomousCommand = (CommandGroup) new RWRTAuton();
+        //Switches between autonomous commands (uncomment and recomment)
+        autonomousCommand = (CommandGroup) new LowBarAuton(); //low bar
+        //autonomousCommand = (CommandGroup) new RWRTAuton(); //rock wall/rough terrain
         driveTrain.shiftToSpeed();
     }
 	
@@ -44,7 +47,8 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
+	
+	//initializes objects for autonomous
     public void autonomousInit() {
     	if (Robot.driveTrain.get().equals(Value.kForward)|| Robot.driveTrain.get().equals(Value.kOff))
     		SmartDashboard.putString("DB/String 0", "Mode: Power Mode");
