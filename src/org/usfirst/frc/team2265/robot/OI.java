@@ -25,7 +25,7 @@ public class OI {
 	public static Button shoot = new JoystickButton(atkJoy, 1); //atk joystick a
 	public static Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
 	public static Button acquire = new JoystickButton(atkJoy, 2); //atk joystick b
-	public static Button turnCam = new JoystickButton(atkJoy, 10); // back button 
+	public static Button turnCam = new JoystickButton(atkJoy, 7); // back button 
 	public static Button rollerUp = new JoystickButton (atkJoy, 6); //Right
 	public static Button rollerDown = new JoystickButton (atkJoy, 5); //Left
 

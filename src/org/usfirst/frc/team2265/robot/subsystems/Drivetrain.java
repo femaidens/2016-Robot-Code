@@ -6,11 +6,8 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,25 +15,32 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Drivetrain extends Subsystem {
-     
+    
+	//Initalizes talons for drivetrain 
 	public static CANTalon frontLeft= new CANTalon(RobotMap.frontLeftPort); 
     public static CANTalon frontRight= new CANTalon(RobotMap.frontRightPort); 
     public static CANTalon rearLeft= new CANTalon(RobotMap.rearLeftPort); 
     public static CANTalon rearRight= new CANTalon(RobotMap.rearRightPort); 
+    //Initializes driving joysticks
     public static Joystick rightJoy= new Joystick(RobotMap.rightJoyPort); 
     public static Joystick leftJoy= new Joystick(RobotMap.leftJoyPort);
     
+    //Initializes transmission solenoid
     public static DoubleSolenoid gearShifter= new DoubleSolenoid(RobotMap.transPort1, RobotMap.transPort2); 
     //public static DoubleSolenoid gearShifter2= new DoubleSolenoid(RobotMap.transPort3, RobotMap.transPort4);
-	public static Compressor compressy = new Compressor();
+	
+    
+    //Initializes compressor and robot drive system
+    public static Compressor compressy = new Compressor();
     public static RobotDrive TankDrive= new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
     
+    //Initializes encoders for the left and right sides of the drivetrain  
     public Drivetrain(){
     	frontRight.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder); 
     	frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	//frontRight.configEncoderCodesPerRev(255);
     }
-
+    //Gets Joystick values, uses values to control robot, displays velocity 
 	public void drive(){
 		double leftVal= leftJoy.getY();
 		double rightVal= rightJoy.getY(); 
@@ -44,6 +48,7 @@ public class Drivetrain extends Subsystem {
 		SmartDashboard.putNumber("Right Encoder Values", frontRight.getEncVelocity());
 		SmartDashboard.putNumber("Left Encoder Vals" , frontLeft.getEncVelocity());
 	}	
+	//drives with set parameters 
     public void drive (double x, double y){
     	//TankDrive.tankDrive(x, y); 
     	
@@ -53,40 +58,29 @@ public class Drivetrain extends Subsystem {
     	frontLeft.set(y);
     	rearLeft.set(y);
     }
+    
+    //Shifts transmission to speed/power mode 
     public void shiftToSpeed(){
     	gearShifter.set(DoubleSolenoid.Value.kReverse); 
-    	//gearShifter2.set(DoubleSolenoid.Value.kReverse);
-    }
-    public void shiftToPower(){
-    	gearShifter.set(DoubleSolenoid.Value.kForward);
-    	//gearShifter2.set(DoubleSolenoid.Value.kForward);
-    	
-    }
-    public boolean isDriving(){
-    	if(frontRight.get() > 0 ||frontRight.get()< 0) {
-    		return true; 
-    	}
-    	return false; 
     }
     
+    public void shiftToPower(){
+    	gearShifter.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    //Returns transmission setting
     public Value get() {
     	return gearShifter.get(); 
     }
+    
+    //Returns a string depending on transmission
     public String toString(){
     	if (get() == DoubleSolenoid.Value.kForward)
 			return "Power Mode";
     	else
     		return "Speed Mode";
     }
-    public void collision() {
-    	Timer timer = new Timer();
-    	timer.start();
-    	while (timer.get() <= 5.5) {    
-    	}
-    	while (timer.get() < 7.5) {
-    		drive(-0.3, -0.3);
-    	}
-    }
+  
     // Put methods for controlling this subsystem
     // here. Call these from Commands.    
 	@Override

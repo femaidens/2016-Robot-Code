@@ -1,26 +1,16 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-//import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-//import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Piston extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	//Declares objects for Piston
+	DoubleSolenoid actuator, actuator2; 
 	
-	DoubleSolenoid actuator, actuator2;
-	Timer timer = new Timer(); 
-	
+	//Piston constructor (for the cannon)
 	public Piston (int port1, int port2, int port3, int port4) {
-	//public Piston (int port1, int port2) {
 		actuator = new DoubleSolenoid(port1, port2);
 		actuator2 = new DoubleSolenoid(port3, port4);
 		System.out.println("Piston created." );
@@ -49,8 +39,6 @@ public class Piston extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     	actuator.set(DoubleSolenoid.Value.kOff);
     	actuator2.set(DoubleSolenoid.Value.kOff);
     	System.out.println("Piston default command run");
