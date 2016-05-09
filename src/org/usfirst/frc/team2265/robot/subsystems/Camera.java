@@ -52,7 +52,7 @@ public class Camera extends Subsystem {
     //	double imgHeight = table.getNumber("IMAGE_HEIGHT", defaultVals) / 2;
     	double imgWidth= (table.getNumber("IMAGE_WIDTH", defaultVals) / 2); 
     	double cogX = table.getNumber("COG_X", defaultVals); 
-    	double difference = cogX - imgWidth;
+    	double difference = cogX - imgWidth + 20;
     	/*double largest= 0.0;
     	for (int i = 0 ; i < areas.length; i++){
     		if (areas[i] > areas[i-1] && areas.length >1)

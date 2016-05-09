@@ -27,7 +27,7 @@ public class Drivetrain extends Subsystem {
     public static Joystick leftJoy= new Joystick(RobotMap.leftJoyPort);
     
     public static DoubleSolenoid gearShifter= new DoubleSolenoid(RobotMap.transPort1, RobotMap.transPort2); 
-    public static DoubleSolenoid gearShifter2= new DoubleSolenoid(RobotMap.transPort3, RobotMap.transPort4);
+    //public static DoubleSolenoid gearShifter2= new DoubleSolenoid(RobotMap.transPort3, RobotMap.transPort4);
 	public static Compressor compressy = new Compressor();
     public static RobotDrive TankDrive= new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
     
@@ -55,11 +55,11 @@ public class Drivetrain extends Subsystem {
     }
     public void shiftToSpeed(){
     	gearShifter.set(DoubleSolenoid.Value.kReverse); 
-    	gearShifter2.set(DoubleSolenoid.Value.kReverse);
+    	//gearShifter2.set(DoubleSolenoid.Value.kReverse);
     }
     public void shiftToPower(){
     	gearShifter.set(DoubleSolenoid.Value.kForward);
-    	gearShifter2.set(DoubleSolenoid.Value.kForward);
+    	//gearShifter2.set(DoubleSolenoid.Value.kForward);
     	
     }
     public boolean isDriving(){

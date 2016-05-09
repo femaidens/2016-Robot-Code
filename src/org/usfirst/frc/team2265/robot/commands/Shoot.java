@@ -30,14 +30,15 @@ public class Shoot extends Command {
     protected void execute() {
     	//Robot.compressy.stop(); 
     	if (Robot.cannon.isHigh) {
-    		Robot.cannon.spinWheels(v);
+    		Robot.cannon.spinWheelsShoot(v);
+    		System.out.println(v + "");
     		if (RobotMap.turningCam == true) {
         		Robot.cannon.turnCam();
         		RobotMap.turningCam = false;
         	}
     	}
     	if (Robot.cannon.isLow) {
-    		Robot.cannon.spinWheels(v*0.75);
+    		Robot.cannon.spinWheelsShoot(v*0.75);
     		if (RobotMap.turningCam == true) {
         		Robot.cannon.turnCam();
         		RobotMap.turningCam = false;

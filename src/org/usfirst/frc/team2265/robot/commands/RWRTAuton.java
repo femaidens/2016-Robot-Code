@@ -9,7 +9,7 @@ public class RWRTAuton extends CommandGroup {
     
     public  RWRTAuton() {
     	addSequential(new Jerk()); //works
-    	addSequential(new AutonDrive (0.6, 0.6, 6.0));
+    	addSequential(new AutonDrive (0.7, 0.7, 7.0));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

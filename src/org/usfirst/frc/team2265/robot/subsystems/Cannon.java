@@ -65,11 +65,19 @@ public class Cannon extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 
-    public void spinWheels(double velocity) {
+    public void spinWheelsIntake(double velocity) {
         //positive velocity is to shoot
         //negative velocity is to acquire
-        cannonFL.set(-velocity);
+    	cannonFL.set(-velocity);
         cannonFR.set(velocity);
+    }
+    
+    public void spinWheelsShoot(double velocity) {
+        //positive velocity is to shoot
+        //negative velocity is to acquire
+    	
+    	cannonFL.set(-0.70);
+        cannonFR.set(0.70);
     }
 
     public void spinWheels(double leftVelocity, double rightVelocity) {
@@ -92,8 +100,10 @@ public class Cannon extends Subsystem {
     
     public void turnCam() { 
         //while (timer.get() < camSecs) 
-        camTalon.set(.87);
+        camTalon.set(-.87);
         Timer.delay(camSecs);
+        camTalon.set(.87);
+        Timer.delay(camSecs-.076);
         camTalon.set(0.0); 
         isShooting = true;
         /*if(limitSwitch.get() == 0){
@@ -127,7 +137,7 @@ public class Cannon extends Subsystem {
 
     public void rollerShootPos() {
     	rollerPos.set(RobotMap.up); 
-    	Timer.delay(0.5);
+    	Timer.delay(1.0);
     	rollerPos.set(0.0);
     }
     
