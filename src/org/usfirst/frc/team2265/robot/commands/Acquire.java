@@ -15,7 +15,7 @@ public class Acquire extends Command {
     protected void execute() {
     	Robot.compressy.stop(); 
     	Robot.cannon.spinRoller(-velocity);
-    	Robot.cannon.spinWheelsIntake(-velocity);
+    	Robot.cannon.spinWheels(-velocity, -velocity);
     }
 
     protected boolean isFinished() {

@@ -65,20 +65,6 @@ public class Cannon extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 
-    public void spinWheelsIntake(double velocity) {
-        //positive velocity is to shoot
-        //negative velocity is to acquire
-    	cannonFL.set(-velocity);
-        cannonFR.set(velocity);
-    }
-    
-    public void spinWheelsShoot(double velocity) {
-        //positive velocity is to shoot
-        //negative velocity is to acquire
-    	
-    	cannonFL.set(-0.70);
-        cannonFR.set(0.70);
-    }
 
     public void spinWheels(double leftVelocity, double rightVelocity) {
         //positive velocity is to shoot
