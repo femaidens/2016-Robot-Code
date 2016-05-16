@@ -9,40 +9,32 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ToggleMode extends Command {
 	boolean shifted;
+	
     public ToggleMode() {}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
-
-    // Called repeatedly when this Command is scheduled to run
+    protected void initialize() {}
+    
     protected void execute() {
     	
     	if (Robot.driveTrain.get().equals(Value.kForward)|| Robot.driveTrain.get().equals(Value.kOff)){
     		Robot.driveTrain.shiftToSpeed();
     		SmartDashboard.putString("DB/String 0", "Mode: Power Mode");
-    		//SmartDashboard.putString("Mode: ", "Speed Mode");
     		shifted = true;
     		return;
-    		
     	}
     	
     	if(Robot.driveTrain.get().equals(Value.kReverse)|| Robot.driveTrain.get().equals(Value.kOff)){
     		Robot.driveTrain.shiftToPower(); 
     		SmartDashboard.putString("DB/String 0", "Mode: Speed Mode");
-    		//SmartDashboard.putString("Mode: ", "Power Mode");
     		shifted = true; 
     		return;
     	}
     }
-
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return shifted;
     }
 
-    protected void end() {
-    }
-    protected void interrupted() {
-    }
+    protected void end() {}
+    
+    protected void interrupted() {}
 }
