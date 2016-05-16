@@ -1,3 +1,4 @@
+//This command acquires the ball (the roller must be down)
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.*;
