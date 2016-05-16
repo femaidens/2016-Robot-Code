@@ -1,12 +1,10 @@
+//moves the roller up 
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class RollerUp extends Command {
 
 	boolean done = false; 
@@ -25,8 +23,6 @@ public class RollerUp extends Command {
 
     protected void end() {}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
 }
