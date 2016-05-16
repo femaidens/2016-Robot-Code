@@ -1,3 +1,4 @@
+//this command controls driving in autonomous.
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
@@ -7,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AutonDrive extends Command {
 
-    double x, y, time, timePassed; 
+    double l, r, time, timePassed; 
     Timer timer; 
     
-	public AutonDrive(double xDir, double yDir, double seconds) {
-        x= -xDir; 
-        y= -yDir;
-        time= seconds;  
+	public AutonDrive(double left, double right, double seconds) {
+        l = -left;
+        r = -right;
+        time = seconds;  
     }
 
     protected void initialize() {
@@ -24,7 +25,7 @@ public class AutonDrive extends Command {
     protected void execute() {
     	    timePassed= timer.get();
     		System.out.println(timer.get() + "");
-    		Robot.driveTrain.drive(x, y); 
+    		Robot.driveTrain.drive(l, r); 
     }
 
     protected boolean isFinished() {
