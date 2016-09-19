@@ -32,7 +32,7 @@ public class OI {
 	//Links button to command
 	public void bindButtons() {
 		toggleMode.whenPressed(new ToggleMode());
-		shoot.whileHeld(new Shoot(.75));
+		shoot.whileHeld(new Shoot(0.65));
 		shoot.whenReleased(new StopCannon());
 		toggleCannonPos.whenPressed(new ToggleCannon());
 		acquire.whileHeld(new Acquire());

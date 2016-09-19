@@ -30,7 +30,7 @@ public class Shoot extends Command {
     protected void execute() {
     	//Robot.compressy.stop(); 
     	if (Robot.cannon.isHigh) {
-    		Robot.cannon.spinWheels(v, v);
+    		Robot.cannon.spinWheels(-v, -v);
     		System.out.println(v + "");
     		if (RobotMap.turningCam == true) {
         		Robot.cannon.turnCam();
@@ -38,7 +38,7 @@ public class Shoot extends Command {
         	}
     	}
     	if (Robot.cannon.isLow) {
-    		Robot.cannon.spinWheels(v*0.75, v*0.75);
+    		Robot.cannon.spinWheels(v*-0.75, v*-0.75);
     		if (RobotMap.turningCam == true) {
         		Robot.cannon.turnCam();
         		RobotMap.turningCam = false;
@@ -55,8 +55,9 @@ public class Shoot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.compressy.start();
+    	Robot.compressy.start();
     	RobotMap.turningCam = false; 
+    	//Robot.compressy.start(); 
     }
 
     // Called when another command which requires one or more of the same

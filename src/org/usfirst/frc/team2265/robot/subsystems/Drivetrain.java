@@ -22,8 +22,9 @@ public class Drivetrain extends Subsystem {
     public static CANTalon rearLeft= new CANTalon(RobotMap.rearLeftPort); 
     public static CANTalon rearRight= new CANTalon(RobotMap.rearRightPort); 
     //Initializes driving joysticks
-    public static Joystick rightJoy= new Joystick(RobotMap.rightJoyPort); 
-    public static Joystick leftJoy= new Joystick(RobotMap.leftJoyPort);
+    //public static Joystick rightJoy= new Joystick(RobotMap.rightJoyPort); 
+    //public static Joystick leftJoy= new Joystick(RobotMap.leftJoyPort);
+    public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort); 
     
     //Initializes transmission solenoid
     public static DoubleSolenoid gearShifter= new DoubleSolenoid(RobotMap.transPort1, RobotMap.transPort2); 
@@ -42,8 +43,8 @@ public class Drivetrain extends Subsystem {
     }
     //Gets Joystick values, uses values to control robot, displays velocity 
 	public void drive(){
-		double leftVal= leftJoy.getY();
-		double rightVal= rightJoy.getY(); 
+		double leftVal= atkJoy.getRawAxis(1);
+		double rightVal=atkJoy.getRawAxis(5);
 		TankDrive.tankDrive(leftVal, rightVal); 
 		SmartDashboard.putNumber("Right Encoder Values", frontRight.getEncVelocity());
 		SmartDashboard.putNumber("Left Encoder Vals" , frontLeft.getEncVelocity());
