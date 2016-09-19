@@ -1,3 +1,4 @@
+//This command causes the robot to jerk to make the cannon drop from starting position.
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;

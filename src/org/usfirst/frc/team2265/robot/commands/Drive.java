@@ -1,3 +1,4 @@
+//This command controls the driving of the robot (in teleop).
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
@@ -5,12 +6,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Drive extends Command {
 
-    double x, y; 
+    double l, r; 
     
-	public Drive(double xDir, double yDir) {
-        //requires(Robot.driveTrain); 
-        x= xDir; 
-        y= yDir; 
+	public Drive(double left, double right) {
+        l = left; 
+        r = right;
     }
 
     protected void initialize() {}
