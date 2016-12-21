@@ -16,7 +16,7 @@ public class Drive extends Command {
     protected void initialize() {}
 
     protected void execute() {
-		Robot.driveTrain.drive(x,y); 
+		Robot.driveTrain.drive(l,r); 
     }
 
     protected boolean isFinished() {

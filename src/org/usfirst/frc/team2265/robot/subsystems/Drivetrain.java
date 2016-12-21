@@ -43,7 +43,7 @@ public class Drivetrain extends Subsystem {
     }
     //Gets Joystick values, uses values to control robot, displays velocity 
 	public void drive(){
-		double leftVal= atkJoy.getRawAxis(1);
+		double leftVal= atkJoy.getRawAxis(2);
 		double rightVal=atkJoy.getRawAxis(5);
 		TankDrive.tankDrive(leftVal, rightVal); 
 		SmartDashboard.putNumber("Right Encoder Values", frontRight.getEncVelocity());
