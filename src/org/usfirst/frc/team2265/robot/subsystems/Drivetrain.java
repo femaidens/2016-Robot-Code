@@ -2,7 +2,8 @@ package org.usfirst.frc.team2265.robot.subsystems;
 
 import org.usfirst.frc.team2265.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
+//import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -43,7 +44,7 @@ public class Drivetrain extends Subsystem {
     }
     //Gets Joystick values, uses values to control robot, displays velocity 
 	public void drive(){
-		double leftVal= atkJoy.getRawAxis(2);
+		double leftVal= atkJoy.getRawAxis(1);
 		double rightVal=atkJoy.getRawAxis(5);
 		TankDrive.tankDrive(leftVal, rightVal); 
 		SmartDashboard.putNumber("Right Encoder Values", frontRight.getEncVelocity());

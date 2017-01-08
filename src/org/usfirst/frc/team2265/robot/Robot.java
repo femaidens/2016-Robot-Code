@@ -32,9 +32,9 @@ public class Robot extends IterativeRobot {
         compressy.start(); 
         oi.bindButtons();
         
-        cammy = CameraServer.getInstance();
+        /*cammy = CameraServer.getInstance();
         cammy.setQuality(50); 
-        cammy.startAutomaticCapture("cam0"); 
+        cammy.startAutomaticCapture("cam0"); */
         
         //Switches between autonomous commands (uncomment and recomment)
         autonomousCommand = (CommandGroup) new LowBarAuton(); //low bar
@@ -71,6 +71,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        compressy.start(); 
         driveTrain.drive();  
         driveTrain.toString(); 
     }

@@ -21,7 +21,7 @@ public class OI {
 	public static Joystick leftJoy = new Joystick(RobotMap.leftJoyPort);
 
 	//Initializes buttons
-	public static Button toggleMode = new JoystickButton(rightJoy, 3); 
+	public static Button toggleMode = new JoystickButton(atkJoy, 3); 
 	public static Button shoot = new JoystickButton(atkJoy, 1); //atk joystick a
 	public static Button toggleCannonPos = new JoystickButton(atkJoy, 4); //button y
 	public static Button acquire = new JoystickButton(atkJoy, 2); //atk joystick b

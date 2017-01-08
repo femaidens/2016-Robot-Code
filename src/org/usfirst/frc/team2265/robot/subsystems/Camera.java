@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2265.robot.subsystems;
-import edu.wpi.first.wpilibj.CANTalon;
+
+import com.ctre.CANTalon;
+//import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Sendable;

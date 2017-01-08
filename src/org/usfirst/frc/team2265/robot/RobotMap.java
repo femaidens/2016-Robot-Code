@@ -10,21 +10,23 @@ public class RobotMap {
 	//Solenoid Ports
 	public static int cannonSolPort1 = 0;
 	public static int cannonSolPort2 = 1;
-	public static int cannonSolPort3 = 2; 
-	public static int cannonSolPort4 = 3; 
-	public static int transPort1= 4;
-	public static int transPort2= 5;
+	public static int cannonSolPort3 = 4; 
+	public static int cannonSolPort4 = 5; 
+	public static int transPort1= 2;
+	public static int transPort2= 3;
 	
 	//Talon Ports
-	public static int cannonFLPort = 5;
-	public static int cannonFRPort = 6;
-	public static int rollerPort = 4; 
-	public static int acquirer = 1;
-	public static int camTalonPort = 11; 
-	public static int rearLeftPort = 7;
-	public static int frontLeftPort = 8;
-	public static int rearRightPort = 9;
-	public static int frontRightPort = 10;
+	public static int cannonFLPort = 9; // 100%
+	public static int cannonFRPort = 3; // 100%
+	public static int rollerPort = 8; // doesn't matter
+	public static int acquirer = 7; // doesn't matter
+	public static int camTalonPort = 1; // 100%
+	public static int rearLeftPort = 5; // ?
+	public static int frontLeftPort = 6; // ?
+	public static int rearRightPort = 4; // 100%
+	public static int frontRightPort = 2; // 100%
+	
+	//also need to figure out why only one piston on the cannon is extending
 	
 	//Other
 	public static double up = -0.35;
